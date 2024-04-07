@@ -31,7 +31,7 @@ app.use(
 app.use("/files", express.static(path.join(__dirname, "files")));
 
 //connect to DB
-const mongoUrl = process.env.mongodbLocal;
+const mongoUrl = process.env.mongodbLive;
 mongoose.connect(mongoUrl);
 
 const secretKey = process.env.SECRET;
