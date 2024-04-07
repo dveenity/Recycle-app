@@ -21,7 +21,7 @@ const Home = () => {
 
   const { data, isLoading, isError, refetch } = useQuery("user", fetchUser);
 
-  if (isError || !data) {
+  if (isError) {
     // logout if error
     return (
       <div className="errorFetch">
