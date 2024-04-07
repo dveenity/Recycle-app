@@ -21,8 +21,6 @@ const Home = () => {
 
   const { data, isLoading, isError, refetch } = useQuery("user", fetchUser);
 
-  if (isLoading) return <PageLoader />;
-
   if (isError || !data) {
     // logout if error
     return (
@@ -30,6 +28,8 @@ const Home = () => {
         Error fetching data <Logout /> and try again
       </div>
     );
+  } else if (isLoading) {
+    return <PageLoader />;
   }
 
   const { role, _id } = data;

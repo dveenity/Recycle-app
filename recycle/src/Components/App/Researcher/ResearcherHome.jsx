@@ -42,7 +42,7 @@ const ResearcherHome = () => {
         </div>
       </div>
       <div>
-        <h3>dashboard</h3>
+        <h3>Dashboard</h3>
         <ul>
           <li>
             <Link to="/dataUpload">
