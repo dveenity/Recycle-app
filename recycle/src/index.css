@@ -95,7 +95,8 @@ a {
 .goBack {
   font-size: 1.5rem;
   background-color: transparent;
-  border: 1px solid var(--green);
+  border: 1px solid var(--white);
+  color: var(--green);
   border-radius: 50%;
   height: 5rem;
   width: 2.5rem;
@@ -105,7 +106,8 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--header);
+  background-color: var(--darkest-green);
+  color: var(--white);
   padding: 0.5rem;
   width: 100%;
 }
@@ -153,7 +155,7 @@ a {
     a {
       display: flex;
       align-items: center;
-      color: green;
+      color: var(--green);
     }
   }
 
@@ -340,6 +342,7 @@ a {
 
   h2 {
     font-size: clamp(1.7rem, 4vw, 2rem);
+    color: var(--white);
   }
 
   button {
@@ -860,10 +863,10 @@ a {
       box-shadow: 1px 3px 7px var(--darkest-green);
 
       li {
-        background-color: var(--green);
+        background-color: var(--darkest-green);
         padding: 0.5rem;
         border-radius: 1rem;
-        box-shadow: 1px 2px 3px var(--black);
+        box-shadow: 1px 2px 3px var(--green);
         color: var(--white);
         font-size: clamp(1rem, 4vw, 1.4rem);
       }
@@ -936,7 +939,8 @@ a {
     gap: 1rem;
 
     li {
-      background-color: var(--header);
+      background-color: var(--darkest-green);
+      color: var(--white);
       padding: 0.7rem;
       display: flex;
       align-items: center;
@@ -965,10 +969,10 @@ a {
     gap: 1rem;
 
     li {
-      background-color: var(--green);
+      background-color: var(--darkest-green);
       border-radius: 1rem;
       transition: 0.1s ease-in-out;
-      box-shadow: 1px 5px 5px var(--darkest-green);
+      box-shadow: 1px 5px 5px var(--green);
       height: 10rem;
       width: 45vw;
       max-width: 12rem;
