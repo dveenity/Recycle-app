@@ -78,10 +78,10 @@ const AdminHome = () => {
           users: <span>{totalUsers}</span>
         </div>
         <div>
-          recycled items: <span>{totalRecycledItems}</span>
+          Recycled Items: <span>{totalRecycledItems}</span>
         </div>
         <div>
-          points earned: <span>{totalRecycledPoints}</span>
+          Points Earned: <span>{totalRecycledPoints}</span>
         </div>
       </div>
       <div>
