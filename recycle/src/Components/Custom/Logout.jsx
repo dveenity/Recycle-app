@@ -5,6 +5,7 @@ const Logout = () => {
 
   const logOut = () => {
     logout();
+    window.location.reload(); // Reload the page
   };
 
   return (
