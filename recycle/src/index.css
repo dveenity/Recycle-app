@@ -327,15 +327,14 @@ a {
 /* STYLING HEADER */
 .header {
   display: flex;
-  height: 3.5rem;
+  height: 4rem;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--header);
+  background-color: var(--darkest-green);
   padding: 0 0.8rem;
 
   > img {
     height: 3rem;
-    mix-blend-mode: darken;
     border-radius: 50%;
   }
 
@@ -349,6 +348,7 @@ a {
     border-radius: 0.5rem;
     height: fit-content;
     color: var(--darkest-green);
+    background-color: white;
     box-shadow: 1px 2px 3px var(--darkest-green);
   }
 }

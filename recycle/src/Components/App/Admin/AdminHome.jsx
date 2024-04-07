@@ -75,7 +75,7 @@ const AdminHome = () => {
       <h3>Welcome {name}</h3>
       <div>
         <div>
-          users: <span>{totalUsers}</span>
+          Users: <span>{totalUsers}</span>
         </div>
         <div>
           Recycled Items: <span>{totalRecycledItems}</span>
