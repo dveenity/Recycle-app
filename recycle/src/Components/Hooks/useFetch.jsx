@@ -1,4 +1,4 @@
-const serVer = `http://localhost:2244`;
+const serVer = `https://recycle-app-backend.vercel.app/`;
 const token = localStorage.getItem("recycle-users");
 
 // fetch logged in user

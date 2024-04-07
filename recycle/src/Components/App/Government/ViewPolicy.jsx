@@ -6,7 +6,7 @@ import HeaderGoBack from "../../Custom/HeaderGoBack";
 import ButtonLoad from "../../Animations/ButtonLoad";
 import { useState } from "react";
 
-const serVer = `http://localhost:2244`;
+const serVer = `https://recycle-app-backend.vercel.app/`;
 
 const ViewPolicy = () => {
   const [deleteBtn, setDeleteBtn] = useState("Delete Policy");

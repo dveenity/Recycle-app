@@ -15,7 +15,7 @@ import "@react-pdf-viewer/core/lib/styles/index.css";
 import axios from "axios";
 import ButtonLoad from "../../Animations/ButtonLoad";
 
-const serVer = `http://localhost:2244`;
+const serVer = `https://recycle-app-backend.vercel.app/`;
 
 const DataAccess = () => {
   const [pdfFile, setPdfFile] = useState(null);

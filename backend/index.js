@@ -23,7 +23,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: ["*", "http://localhost:5173", "http://localhost:2244"],
+    origin: [
+      "*",
+      "http://localhost:5173",
+      "https://recycle-app-backend.vercel.app/",
+    ],
   })
 );
 
