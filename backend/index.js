@@ -26,7 +26,7 @@ app.use(
     origin: [
       "*",
       "http://localhost:5173",
-      "https://recycle-app-backend.vercel.app/",
+      "https://recycle-app-backend.vercel.app",
     ],
   })
 );

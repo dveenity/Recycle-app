@@ -12,7 +12,7 @@ import axios from "axios";
 
 import { FaEye, FaRegEyeSlash } from "react-icons/fa";
 
-const serVer = `https://recycle-app-backend.vercel.app/`;
+const serVer = `https://recycle-app-backend.vercel.app`;
 const SignUp = () => {
   // react form
   const form = useForm();

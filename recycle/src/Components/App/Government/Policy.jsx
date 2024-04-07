@@ -4,7 +4,7 @@ import HeaderGoBack from "../../Custom/HeaderGoBack";
 import ButtonLoad from "../../Animations/ButtonLoad";
 import { useState } from "react";
 
-const serVer = `https://recycle-app-backend.vercel.app/`;
+const serVer = `https://recycle-app-backend.vercel.app`;
 
 const Policy = () => {
   const [deployBtn, setDeployBtn] = useState("Deploy Policy");

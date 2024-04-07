@@ -9,7 +9,7 @@ import Logout from "../../Custom/Logout";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 
-const serVer = `https://recycle-app-backend.vercel.app/`;
+const serVer = `https://recycle-app-backend.vercel.app`;
 
 const Profile = () => {
   const [navBar, setNavBar] = useState(false);

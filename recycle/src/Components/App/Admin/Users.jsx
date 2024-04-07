@@ -6,7 +6,7 @@ import axios from "axios";
 import { useState } from "react";
 import ButtonLoad from "../../Animations/ButtonLoad";
 
-const serVer = `https://recycle-app-backend.vercel.app/`;
+const serVer = `https://recycle-app-backend.vercel.app`;
 
 const Users = () => {
   const [result, setResult] = useState("");

@@ -3,7 +3,7 @@ import { useState } from "react";
 import PropTypes from "prop-types"; // Correct import
 import ButtonLoad from "../Animations/ButtonLoad";
 
-const serVer = `https://recycle-app-backend.vercel.app/`;
+const serVer = `https://recycle-app-backend.vercel.app`;
 
 const Role = ({ userId }) => {
   // Destructure _id and refetch from userId prop

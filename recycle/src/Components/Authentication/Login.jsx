@@ -11,7 +11,7 @@ import axios from "axios";
 import { FaEye, FaRegEyeSlash } from "react-icons/fa";
 import ButtonLoad from "../Animations/ButtonLoad";
 
-const serVer = `https://recycle-app-backend.vercel.app/`;
+const serVer = `https://recycle-app-backend.vercel.app`;
 
 const Login = () => {
   // react form

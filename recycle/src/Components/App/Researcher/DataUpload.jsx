@@ -2,7 +2,7 @@ import HeaderGoBack from "../../Custom/HeaderGoBack";
 import { useState } from "react";
 import axios from "axios";
 
-const serVer = `https://recycle-app-backend.vercel.app/`;
+const serVer = `https://recycle-app-backend.vercel.app`;
 
 const token = localStorage.getItem("recycle-users");
 
