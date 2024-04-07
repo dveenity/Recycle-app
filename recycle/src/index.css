@@ -767,6 +767,7 @@ a {
       font-size: clamp(1.3rem, 4vw, 1.7rem);
       box-shadow: 1px 3px 5px var(--darkest-green);
       transition: 0.1s ease-in-out;
+      color: var(--white);
 
       &:hover {
         transform: scale(1.05);

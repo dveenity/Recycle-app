@@ -61,7 +61,7 @@ const Home = () => {
         {role === "user" && <User />}
         {role === "researcher" && <ResearcherHome />}
         {role === "business" && <Business />}
-        {role === "policy" && <Government />}
+        {role === "policy-maker" && <Government />}
       </div>
       <div className="page-end">
         <Link to="/viewPolicy">

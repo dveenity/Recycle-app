@@ -15,7 +15,13 @@ const Role = ({ userId }) => {
   const [result, setResult] = useState("");
 
   // Define roles
-  const roles = ["select role", "user", "researcher", "business", "policy"];
+  const roles = [
+    "select role",
+    "user",
+    "researcher",
+    "business",
+    "policy-maker",
+  ];
 
   // Handle change event
   const handleRoleChange = (event) => {
