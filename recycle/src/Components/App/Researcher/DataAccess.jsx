@@ -11,6 +11,7 @@ import { Viewer } from "@react-pdf-viewer/core";
 
 // Import the styles
 import "@react-pdf-viewer/core/lib/styles/index.css";
+
 import axios from "axios";
 import ButtonLoad from "../../Animations/ButtonLoad";
 
@@ -96,7 +97,12 @@ const DataAccess = () => {
         )}
       </ul>
       <p className="error-p">{result}</p>
-      {selectedFileId && pdfFile && <Viewer fileUrl={pdfFile} />}
+      {selectedFileId && pdfFile && (
+        <div>
+          <Viewer fileUrl={pdfFile} />
+          <button onClick={() => setSelectedFileId(null)}>Close</button>
+        </div>
+      )}
       <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js"></Worker>
     </div>
   );
