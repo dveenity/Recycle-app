@@ -28,7 +28,9 @@ const Home = () => {
         Error fetching data <Logout /> and try again
       </div>
     );
-  } else if (isLoading) {
+  }
+
+  if (isLoading) {
     return <PageLoader />;
   }
 
