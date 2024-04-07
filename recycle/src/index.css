@@ -29,6 +29,7 @@ ul li {
   list-style: none;
 }
 button {
+  background-color: transparent;
   max-height: 2.5rem;
   height: 100%;
   border: none;
