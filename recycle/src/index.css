@@ -705,6 +705,12 @@ a {
         font-weight: bold;
         height: 2.5rem;
         width: 100%;
+        background-color: var(--white);
+        transition: 0.1s ease-in-out;
+
+        &:hover {
+          transform: scale(1.03);
+        }
       }
     }
   }
