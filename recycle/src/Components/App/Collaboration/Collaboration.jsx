@@ -27,7 +27,7 @@ const Collaboration = () => {
   const output = companies.map((company, i) => (
     <li key={i}>
       <div>
-        Company name: <strong>{company.name}</strong>
+        Company Name: <strong>{company.name}</strong>
       </div>
       <div>
         Email address <strong>{company.email}</strong>

@@ -63,7 +63,7 @@ const Users = () => {
               <li key={users._id}>
                 <div>
                   <div>
-                    name: <strong>{users.name}</strong>
+                    Name: <strong>{users.name}</strong>
                   </div>
                   <div>
                     Email: <strong>{users.email}</strong>

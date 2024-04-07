@@ -61,7 +61,7 @@ const ViewPolicy = () => {
         {hasPolicy ? (
           data.map((policy) => (
             <li key={policy._id}>
-              <h3>name: {policy.policyName}</h3>
+              <h3>Name: {policy.policyName}</h3>
               <p>Author: {policy.authorName}</p>
               <p>Description: {policy.description}</p>
               {name === policy.authorName && (

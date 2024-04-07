@@ -103,7 +103,7 @@ const Profile = () => {
       {navBar && <Nav toggleRoute={[toggleRoute, toggleNav]} />}
       <div className="profile-details">
         <div>
-          name: <span>{name}</span>
+          Name: <span>{name}</span>
         </div>
         <div>
           Role: <span>{role}</span>
