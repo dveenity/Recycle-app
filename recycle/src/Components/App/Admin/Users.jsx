@@ -34,8 +34,6 @@ const Users = () => {
 
       const { data } = res;
 
-      console.log(data);
-
       setResult(data);
 
       // reload page

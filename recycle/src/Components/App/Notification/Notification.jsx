@@ -33,6 +33,7 @@ const Notification = () => {
 
   const hasNotifications = userNotifications.length > 0; // Check if userNotifications array has notifications
 
+  console.log(userNotifications);
   return (
     <div className="notifications">
       <HeaderGoBack h1="Notifications" />
@@ -57,14 +58,14 @@ const Notification = () => {
                     ))}
                   </ul>
                 ) : (
-                  role === "user" && <div>No Notifications yet</div>
+                  <div>No Notifications yet</div>
                 )}
               </div>
             ) : (
               <div>
                 {/* Render content for current route */}
                 <div className="notification-display">
-                  {hasNotifications && role === "user" ? (
+                  {hasNotifications ? (
                     <ul>
                       {userNotifications.map((notification) => (
                         <li key={notification._id}>
@@ -73,7 +74,7 @@ const Notification = () => {
                       ))}
                     </ul>
                   ) : (
-                    role === "user" && <div>No Notifications yet</div>
+                    <div>No Notifications yet</div>
                   )}
                 </div>
               </div>

@@ -105,9 +105,9 @@ const SignUp = () => {
         <form onSubmit={handleSubmit(onSubmit, onError)} noValidate>
           <div className="inputBox">
             <input
+              type="text"
               placeholder="Full Name"
               required
-              type="text"
               id="name"
               {...register("name", { required: "Full Name is required" })}
             />
@@ -116,9 +116,9 @@ const SignUp = () => {
 
           <div className="inputBox">
             <input
+              type="email"
               placeholder="Email"
               required
-              type="email"
               id="email"
               {...register("email", { required: "Email is required" })}
             />

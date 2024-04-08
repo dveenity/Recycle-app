@@ -187,8 +187,13 @@ a {
   display: grid;
   place-content: center;
   background-color: var(--white);
+  background-image: url(./assets/images/authbg.webp);
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: 130%;
 
   .authentication-container {
+    background-color: white;
     box-shadow: 1px 3px 5px var(--green);
     width: 80vw;
     max-width: 400px;
@@ -266,7 +271,7 @@ a {
     a {
       padding: 0.5rem;
       border-radius: 0.5rem;
-      background-color: var(--darker-green);
+      background-color: var(--darkest-green);
       color: var(--white);
       font-size: clamp(1.2rem, 4vw, 1.5rem);
       font-weight: bold;
@@ -285,12 +290,20 @@ a {
   gap: 2rem;
   align-items: center;
 
+  > :first-child {
+    height: 15rem;
+    width: 100%;
+    background-image: url("./assets/images/dashbg.webp");
+    background-position: center;
+    background-size: cover;
+  }
+
   h2 {
     font-size: clamp(1.5rem, 4vw, 2rem);
     color: var(--darker-green);
   }
 
-  > div {
+  > :nth-child(3) {
     display: flex;
     flex-flow: column;
     gap: 0.5rem;
@@ -700,12 +713,12 @@ a {
       }
 
       button {
-        color: var(--green);
+        color: var(--white);
         font-size: clamp(1.5rem, 4vw, 2rem);
         font-weight: bold;
         height: 2.5rem;
         width: 100%;
-        background-color: var(--white);
+        background-color: var(--darkest-green);
         transition: 0.1s ease-in-out;
 
         &:hover {
@@ -858,9 +871,9 @@ a {
     flex-flow: column;
     align-items: center;
     width: 100%;
+    background-color: var(--white);
 
     ul {
-      background-color: var(--white);
       border-radius: 1rem;
       padding: 1rem;
       width: 100%;
@@ -871,12 +884,31 @@ a {
 
       li {
         background-color: var(--darkest-green);
-        padding: 0.5rem;
+        height: 5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
         border-radius: 1rem;
         box-shadow: 1px 2px 3px var(--green);
         color: var(--white);
         font-size: clamp(1rem, 4vw, 1.4rem);
+        transition: 0.1s ease-in-out;
+
+        &:hover {
+          transform: scale(1.03);
+        }
       }
+    }
+
+    div {
+      color: var(--black);
+      font-weight: bold;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem;
     }
   }
 }
