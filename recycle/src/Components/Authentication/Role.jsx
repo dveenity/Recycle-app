@@ -50,7 +50,7 @@ const Role = ({ userId }) => {
   return (
     <div className="role-auth">
       <div></div>
-      <h2>What role are you registering for</h2>
+      <h2>What role are you registering for ?</h2>
       <div>
         <select onChange={handleRoleChange}>
           {roles.map((role, index) => (

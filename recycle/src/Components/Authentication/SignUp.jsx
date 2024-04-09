@@ -54,7 +54,6 @@ const SignUp = () => {
         setResultMessage("Invalid server response, please try again");
       }
     } catch (error) {
-      console.log(error);
       setResultMessage(error.response.data);
     } finally {
       // Hide the message after 2 seconds
@@ -133,7 +132,7 @@ const SignUp = () => {
             {send}
           </button>
         </form>
-        <p className="result">{resultMessage}</p>
+        <p className="error-p">{resultMessage}</p>
         <div className="sign-log">
           <p>Already have an account?</p>
           <Link to="/login">Login</Link>
