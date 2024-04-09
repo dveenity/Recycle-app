@@ -37,47 +37,31 @@ const SignUp = () => {
     const { name, email, password } = data;
 
     try {
-      await axios
-        .post(url, {
-          name,
-          email,
-          password,
-        })
-        .then((result) => {
-          if (result.status === 200) {
-            // save the user to local storage
-            localStorage.setItem("recycle-users", result.data);
+      const result = await axios.post(url, {
+        name,
+        email,
+        password,
+      });
 
-            //update the auth Context
-            dispatch({ type: "LOGIN", payload: result });
+      if (result.status === 200) {
+        // Save the user to local storage
+        localStorage.setItem("recycle-users", result.data);
 
-            setIsLoading(false);
-          } else {
-            // Handle other scenarios or display the actual error message received from the server
-            setResultMessage("invalid server response, please try again");
-
-            // Hide the message after 2 seconds
-            setTimeout(() => {
-              setResultMessage("");
-            }, 3000);
-          }
-        })
-        .catch((error) => {
-          setResultMessage(error.response.data);
-
-          // Hide the message after 2 seconds
-          setTimeout(() => {
-            setResultMessage("");
-          }, 3000);
-        });
+        // Update the auth Context
+        dispatch({ type: "LOGIN", payload: result });
+      } else {
+        // Handle other scenarios or display the actual error message received from the server
+        setResultMessage("Invalid server response, please try again");
+      }
     } catch (error) {
-      setResultMessage("cant connect to server, try again later");
-
+      console.log(error);
+      setResultMessage(error.response.data);
+    } finally {
       // Hide the message after 2 seconds
       setTimeout(() => {
         setResultMessage("");
-      }, 5000);
-    } finally {
+      }, 2000);
+
       setIsLoading(false);
       setSend("Sign Up");
     }

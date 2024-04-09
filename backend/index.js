@@ -80,8 +80,7 @@ app.post("/register", async (req, res) => {
     res.status(200).send(token);
   } catch (error) {
     // Handle registration errors
-
-    res.status(400).send(error);
+    res.status(400).send(error?.message);
   }
 });
 

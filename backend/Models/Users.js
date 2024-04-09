@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
-const bcrypt = require("bcrypt");
-
 const validator = require("validator");
+
+const bcrypt = require("bcrypt");
 
 const Schema = mongoose.Schema;
 
@@ -41,17 +41,12 @@ const UsersSchema = new Schema(
 // Static sign up method and hashing password
 UsersSchema.statics.signup = async function (name, email, password, role) {
   // validation
-  // Regular expression for validating email
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
   if (!name || !email || !password) {
     throw Error("All Fields must be filled");
   } else if (password.length < 3) {
     throw Error("Password too short");
   } else if (!validator.isEmail(email)) {
     throw Error("Not a valid Email");
-  } else if (!emailRegex.test(email)) {
-    throw new Error("Not a valid email");
   }
 
   const exists = await this.findOne({ email });
