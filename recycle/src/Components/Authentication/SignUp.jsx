@@ -28,15 +28,15 @@ const SignUp = () => {
   const onSubmit = async (data) => {
     const url = `${serVer}/register`;
 
+    // Reset error messages
+    setResultMessage("");
+
+    setIsLoading(true);
+    setSend(<ButtonLoad />);
+
+    const { name, email, password } = data;
+
     try {
-      // Reset error messages
-      setResultMessage("");
-
-      setIsLoading(true);
-      setSend(<ButtonLoad />);
-
-      const { name, email, password } = data;
-
       await axios
         .post(url, {
           name,

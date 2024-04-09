@@ -81,7 +81,7 @@ app.post("/register", async (req, res) => {
   } catch (error) {
     // Handle registration errors
 
-    res.status(400).send(error?.message);
+    res.status(400).send(error);
   }
 });
 
