@@ -40,6 +40,9 @@ const Nav = ({ toggleRoute }) => {
         <li>
           <Link to={routeLink}>{routeName}</Link>
         </li>
+        <li>
+          <Link to="/simulation">Simulation</Link>
+        </li>
       </ul>
     </div>
   );

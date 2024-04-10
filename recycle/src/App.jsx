@@ -3,25 +3,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import PageLoader from "./Components/Animations/PageLoader";
 
-// import SignUp from "./Components/Authentication/SignUp";
-// import Login from "./Components/Authentication/Login";
-// import Home from "./Components/App/Home";
-// import Profile from "./Components/App/Profile/Profile";
-// import DataUpload from "./Components/App/Researcher/DataUpload";
-// import DataAccess from "./Components/App/Researcher/DataAccess";
-// import Collaboration from "./Components/App/Collaboration/Collaboration";
-// import Policy from "./Components/App/Government/Policy";
-// import ViewPolicy from "./Components/App/Government/ViewPolicy";
-// import Faq from "./Components/App/User/FAQ";
-// import Recycle from "./Components/App/User/Recycle";
-// import Metrics from "./Components/App/User/Metrics";
-// import Notification from "./Components/App/Notification/Notification";
-// import Feedback from "./Components/App/User/Feedback";
-// import Users from "./Components/App/Admin/Users";
-// import FeatureManagement from "./Components/App/Admin/FeatureManagement";
-// import ManageFeedbacks from "./Components/App/Admin/ManageFeedbacks";
-// import Analytics from "./Components/App/Admin/Analytics";
-
 // use lazy loading to make app load faster
 const SignUp = lazy(() => import("./Components/Authentication/SignUp"));
 const Login = lazy(() => import("./Components/Authentication/Login"));
@@ -49,6 +30,7 @@ const ManageFeedbacks = lazy(() =>
   import("./Components/App/Admin/ManageFeedbacks")
 );
 const Analytics = lazy(() => import("./Components/App/Admin/Analytics"));
+const Simulation = lazy(() => import("./Components/App/Simulation"));
 
 function App() {
   const { user } = useAuthContext();
@@ -74,6 +56,10 @@ function App() {
           <Route
             path="/profile"
             element={user ? <Profile /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/simulation"
+            element={user ? <Simulation /> : <Navigate to="/login" />}
           />
           {/* ADMIN ROUTE */}
           <Route
