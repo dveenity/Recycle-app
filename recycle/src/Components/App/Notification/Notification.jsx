@@ -33,7 +33,6 @@ const Notification = () => {
 
   const hasNotifications = userNotifications.length > 0; // Check if userNotifications array has notifications
 
-  console.log(userNotifications);
   return (
     <div className="notifications">
       <HeaderGoBack h1="Notifications" />
@@ -58,7 +57,7 @@ const Notification = () => {
                     ))}
                   </ul>
                 ) : (
-                  <div>No Notifications yet</div>
+                  role === "user" && <div>No Notifications yet</div>
                 )}
               </div>
             ) : (
@@ -74,7 +73,7 @@ const Notification = () => {
                       ))}
                     </ul>
                   ) : (
-                    <div>No Notifications yet</div>
+                    role === "user" && <div>No Notifications yet</div>
                   )}
                 </div>
               </div>
@@ -83,7 +82,7 @@ const Notification = () => {
         )}
         {/* ADMIN NOTIFICATIONS */}
         <div className="notification-display">
-          {hasNotifications && role === "admin" ? (
+          {role === "admin" ? (
             <ul>
               {adminNotifications.map((notification) => (
                 <li key={notification._id}>{notification.adminMessage}</li>

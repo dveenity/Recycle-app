@@ -49,7 +49,7 @@
 }
 
 .boxes .box > div {
-  --background: #5c8df6;
+  --background: green;
   --top: auto;
   --right: auto;
   --bottom: auto;

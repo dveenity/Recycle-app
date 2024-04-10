@@ -8,6 +8,8 @@ import ButtonLoad from "../../Animations/ButtonLoad";
 import Logout from "../../Custom/Logout";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import { IoMdNotificationsOutline } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const serVer = `https://recycle-app-backend.vercel.app`;
 
@@ -99,6 +101,14 @@ const Profile = () => {
         <button onClick={toggleNav}>
           <RxHamburgerMenu />
         </button>
+        {(role === "user" || role === "admin") && (
+          <Link to="/notifications" className="link-one">
+            <IoMdNotificationsOutline />
+          </Link>
+        )}
+        <Link to={toggleRoute[0].routeLink} className="link-two">
+          {toggleRoute[1].routeName}
+        </Link>
       </div>
       {navBar && <Nav toggleRoute={[toggleRoute, toggleNav]} />}
       <div className="profile-details">
@@ -111,7 +121,9 @@ const Profile = () => {
         <div>
           Email: <span>{email}</span>
         </div>
-        <button onClick={() => toggleEditBox(_id)}>Edit Profile</button>
+        {role !== "admin" && (
+          <button onClick={() => toggleEditBox(_id)}>Edit Profile</button>
+        )}
       </div>
       {editBox && (
         <div className="floating-div">

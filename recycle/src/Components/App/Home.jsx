@@ -15,6 +15,7 @@ import Government from "./Government/Government";
 import { Link } from "react-router-dom";
 import User from "./User/User";
 import { FaQuestion } from "react-icons/fa";
+import { IoMdNotificationsOutline } from "react-icons/io";
 
 const Home = () => {
   const [navBar, setNavBar] = useState(false);
@@ -53,8 +54,17 @@ const Home = () => {
             <button onClick={toggleNav}>
               <RxHamburgerMenu />
             </button>
+            {(role === "user" || role === "admin") && (
+              <Link to="/notifications" className="link-one">
+                <IoMdNotificationsOutline />
+              </Link>
+            )}
+            <Link to={toggleRoute[0].routeLink} className="link-two">
+              {toggleRoute[1].routeName}
+            </Link>
           </div>
         )}
+
         {role === "choose" && <Role userId={[_id, refetch]} />}
         {navBar && <Nav toggleRoute={[toggleRoute, toggleNav]} />}
         {role === "admin" && <AdminHome />}
