@@ -3,6 +3,7 @@ import axios from "axios";
 import HeaderGoBack from "../../Custom/HeaderGoBack";
 import ButtonLoad from "../../Animations/ButtonLoad";
 import { FaRecycle } from "react-icons/fa";
+import Sliding from "../Sliding";
 
 const serVer = `https://recycle-app-backend.vercel.app`;
 
@@ -92,6 +93,7 @@ const Recycle = () => {
           <button type="submit">{recycleBtn}</button>
         </form>
       </div>
+      <Sliding />
       {result && <p className="error-p">{result}</p>}
     </div>
   );

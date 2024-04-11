@@ -1,4 +1,5 @@
 import HeaderGoBack from "../Custom/HeaderGoBack";
+import Sliding from "./Sliding";
 
 const Simulation = () => {
   return (
@@ -16,12 +17,7 @@ const Simulation = () => {
           {/* Add additional links for streaming if desired */}
         </div>
       </div>
-      <div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
+      <Sliding />
     </div>
   );
 };
