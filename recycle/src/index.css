@@ -79,7 +79,7 @@ a {
 .log-out {
   background-color: red;
   padding: 1rem;
-  color: white;
+  color: var(--white);
   font-weight: bold;
   font-size: clamp(1.5rem, 4vw, 2rem);
   margin-top: 5rem;
@@ -256,10 +256,10 @@ a {
 
         .toggle {
           position: absolute;
-          top: 5px;
+          top: 0.7rem;
           bottom: 0;
           right: 0.5rem;
-          color: green;
+          color: var(--green);
         }
       }
 
@@ -817,7 +817,7 @@ a {
       select {
         font-size: clamp(1.3rem, 4vw, 1.7rem);
         font-weight: bold;
-        color: black;
+        color: var(--black);
       }
 
       > * {
