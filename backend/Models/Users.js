@@ -26,7 +26,7 @@ const UsersSchema = new Schema(
       type: String,
       enum: [
         "admin",
-        "user",
+        "general-public",
         "researcher",
         "business",
         "policy-maker",

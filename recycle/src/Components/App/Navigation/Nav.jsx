@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { FaTimes } from "react-icons/fa";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { useQuery } from "react-query";
-import { fetchUser } from "../../Hooks/useFetch";
+import { fetchNotifications, fetchUser } from "../../Hooks/useFetch";
 import PageLoader from "../../Animations/PageLoader";
 
 const Nav = ({ toggleRoute }) => {
@@ -14,14 +14,23 @@ const Nav = ({ toggleRoute }) => {
 
   const { data, isLoading, isError } = useQuery("user", fetchUser);
 
-  if (isLoading) return <PageLoader />;
+  const {
+    data: notificationData,
+    isLoading: notificationLoading,
+    isError: notificationError,
+  } = useQuery("notifications", fetchNotifications);
 
-  if (isError) {
+  if (isLoading || notificationLoading) return <PageLoader />;
+
+  if (isError || notificationError) {
     // logout if error
     return <div>Error fetching data</div>;
   }
 
   const { role } = data;
+
+  // get notification length
+  const notificationCounter = notificationData.length;
 
   return (
     <div className="nav-bar">
@@ -29,9 +38,10 @@ const Nav = ({ toggleRoute }) => {
         <button onClick={toggleNav}>
           <FaTimes />
         </button>
-        {(role === "user" || role === "admin") && (
+        {(role === "general-public" || role === "admin") && (
           <Link to="/notifications">
             <IoMdNotificationsOutline />
+            <div>{notificationCounter}</div>
           </Link>
         )}
       </div>

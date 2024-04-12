@@ -13,11 +13,12 @@ const Role = ({ userId }) => {
   const [role, setRole] = useState("");
   const [selectButton, setSelectButton] = useState("Select Role");
   const [result, setResult] = useState("");
+  const [showConsent, setShowConsent] = useState(false); // State to toggle consent disclaimer
 
   // Define roles
   const roles = [
     "select role",
-    "user",
+    "general-public",
     "researcher",
     "business",
     "policy-maker",
@@ -25,7 +26,15 @@ const Role = ({ userId }) => {
 
   // Handle change event
   const handleRoleChange = (event) => {
-    setRole(event.target.value);
+    const selectedRole = event.target.value;
+    setRole(selectedRole);
+
+    // Toggle consent disclaimer based on selected role
+    if (selectedRole === "business") {
+      setShowConsent(true);
+    } else {
+      setShowConsent(false);
+    }
   };
 
   // Update Role function
@@ -61,6 +70,15 @@ const Role = ({ userId }) => {
         </select>
         <button onClick={updateRole}>{selectButton}</button>
       </div>
+      {showConsent && (
+        <div className="consent-disclaimer">
+          <p>
+            By selecting the business role, you agree to share your business
+            data with other businesses who are also looking to collaborate on
+            recycling initiatives within this platform.
+          </p>
+        </div>
+      )}
       <div>{result}</div>
     </div>
   );

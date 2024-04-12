@@ -101,7 +101,7 @@ const Profile = () => {
         <button onClick={toggleNav}>
           <RxHamburgerMenu />
         </button>
-        {(role === "user" || role === "admin") && (
+        {(role === "general-public" || role === "admin") && (
           <Link to="/notifications" className="link-one">
             <IoMdNotificationsOutline />
           </Link>

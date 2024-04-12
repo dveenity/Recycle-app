@@ -365,6 +365,25 @@ a {
       }
     }
   }
+
+  .consent-disclaimer {
+    font-family: var(--font-family-two);
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    text-align: center;
+    background-color: var(--darkest-green);
+    color: var(--white);
+    width: 80%;
+    max-width: 700px;
+    padding: 0.5rem;
+    border: 0.1rem solid var(--darkest-green);
+    border-radius: 0.5rem;
+    box-shadow: 2px 3px 8px brown;
+    transition: 0.1s ease-in-out;
+
+    &:hover {
+      transform: scale(1.03);
+    }
+  }
 }
 @media only screen and (min-width: 600px) {
   /* authentication */

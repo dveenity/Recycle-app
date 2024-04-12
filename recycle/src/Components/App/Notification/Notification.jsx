@@ -38,7 +38,7 @@ const Notification = () => {
       <HeaderGoBack h1="Notifications" />
       <div>
         {/* USER NOTIFICATIONS */}
-        {role === "user" && (
+        {role === "general-public" && (
           <div className="user-notification">
             {/* Button to toggle between routes */}
             <button onClick={() => setShowOtherRoute(!showOtherRoute)}>
@@ -57,7 +57,7 @@ const Notification = () => {
                     ))}
                   </ul>
                 ) : (
-                  role === "user" && <div>No Notifications yet</div>
+                  role === "general-public" && <div>No Notifications yet</div>
                 )}
               </div>
             ) : (
@@ -73,7 +73,7 @@ const Notification = () => {
                       ))}
                     </ul>
                   ) : (
-                    role === "user" && <div>No Notifications yet</div>
+                    role === "general-public" && <div>No Notifications yet</div>
                   )}
                 </div>
               </div>

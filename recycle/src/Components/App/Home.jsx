@@ -54,7 +54,7 @@ const Home = () => {
             <button onClick={toggleNav}>
               <RxHamburgerMenu />
             </button>
-            {(role === "user" || role === "admin") && (
+            {(role === "general-public" || role === "admin") && (
               <Link to="/notifications" className="link-one">
                 <IoMdNotificationsOutline />
               </Link>
@@ -68,7 +68,7 @@ const Home = () => {
         {role === "choose" && <Role userId={[_id, refetch]} />}
         {navBar && <Nav toggleRoute={[toggleRoute, toggleNav]} />}
         {role === "admin" && <AdminHome />}
-        {role === "user" && <User />}
+        {role === "general-public" && <User />}
         {role === "researcher" && <ResearcherHome />}
         {role === "business" && <Business />}
         {role === "policy-maker" && <Government />}
@@ -78,7 +78,7 @@ const Home = () => {
           Policies
           <MdOutlinePolicy />
         </Link>
-        {role === "user" && (
+        {role === "general-public" && (
           <Link to="/faq-and-support">
             FAQ
             <FaQuestion />
