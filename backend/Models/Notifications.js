@@ -26,7 +26,6 @@ const notificationsSchema = new mongoose.Schema(
       status: {
         type: String,
         enum: ["read", "unread"],
-        default: "unread", // Default status is unread
       },
     },
     timeMessage: {
