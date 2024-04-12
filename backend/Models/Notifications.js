@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-// Define the schema for the Product model
+// Define the schema for the Notifications model
 const notificationsSchema = new mongoose.Schema(
   {
     messageOwner: {
@@ -8,11 +8,26 @@ const notificationsSchema = new mongoose.Schema(
       required: true,
     },
     adminMessage: {
-      type: String,
-      required: true,
+      message: {
+        type: String,
+        required: true,
+      },
+      status: {
+        type: String,
+        required: true,
+        enum: ["read", "unread"],
+        default: "unread", // Default status is unread
+      },
     },
     userMessage: {
-      type: String,
+      message: {
+        type: String,
+      },
+      status: {
+        type: String,
+        enum: ["read", "unread"],
+        default: "unread", // Default status is unread
+      },
     },
     timeMessage: {
       type: String,
@@ -21,5 +36,5 @@ const notificationsSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Create and export the Product model
+// Create and export the Notifications model
 module.exports = mongoose.model("Notifications", notificationsSchema);

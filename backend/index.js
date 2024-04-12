@@ -73,7 +73,10 @@ app.post("/register", async (req, res) => {
     // Save notification to the database
     await Notifications.create({
       messageOwner: name,
-      adminMessage,
+      adminMessage: {
+        message: adminMessage,
+        status: "unread", // Set default status to unread
+      },
     });
 
     // Send the token as a response
@@ -150,7 +153,10 @@ app.delete("/deleteUser/:deletedUserId", async (req, res) => {
     // Save notification to the database
     await Notifications.create({
       messageOwner: "Admin",
-      adminMessage,
+      adminMessage: {
+        message: adminMessage,
+        status: "unread", // Set default status to unread
+      },
     });
 
     res.status(200).send("Success");
@@ -228,7 +234,10 @@ app.put("/update-profile/:userId", async (req, res) => {
     // Save notification to the database
     await Notifications.create({
       messageOwner: name,
-      adminMessage,
+      adminMessage: {
+        message: adminMessage,
+        status: "unread", // Set default status to unread
+      },
     });
 
     res.status(200).send("Profile updated successfully");
@@ -269,7 +278,10 @@ app.post("/upload-files", upload.single("file"), async (req, res) => {
     // Save notification to the database
     await Notifications.create({
       messageOwner: "Admin",
-      adminMessage,
+      adminMessage: {
+        message: adminMessage,
+        status: "unread", // Set default status to unread
+      },
     });
 
     res.status(200).send("success");
@@ -352,7 +364,10 @@ app.post("/deploy-policy", async (req, res) => {
     // Save notification to the database
     await Notifications.create({
       messageOwner: "Admin",
-      adminMessage,
+      adminMessage: {
+        message: adminMessage,
+        status: "unread", // Set default status to unread
+      },
     });
 
     // Save the new policy to the database
@@ -392,7 +407,10 @@ app.delete("/delete-policy/:policyId", async (req, res) => {
     // Save notification to the database
     await Notifications.create({
       messageOwner: "Admin",
-      adminMessage,
+      adminMessage: {
+        message: adminMessage,
+        status: "unread", // Set default status to unread
+      },
     });
 
     res.status(200).send("success");
@@ -461,8 +479,14 @@ app.post("/newRecycleItem", async (req, res) => {
     // Save notification to the database
     await Notifications.create({
       messageOwner: user.name,
-      adminMessage,
-      userMessage,
+      adminMessage: {
+        message: adminMessage,
+        status: "unread", // Set default status to unread
+      },
+      userMessage: {
+        message: userMessage,
+        status: "unread", // Set default status to unread
+      },
       timeMessage: `You can recycle again in 5 minute(s)`,
     });
 
@@ -540,7 +564,10 @@ app.post("/submit-feedback", requireAuth, async (req, res) => {
     // Save notification to the database
     await Notifications.create({
       messageOwner: "Admin",
-      adminMessage,
+      adminMessage: {
+        message: adminMessage,
+        status: "unread", // Set default status to unread
+      },
     });
 
     // Save the feedback to the database

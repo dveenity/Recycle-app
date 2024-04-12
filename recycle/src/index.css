@@ -177,6 +177,16 @@ a {
       display: flex;
       align-items: center;
       color: var(--green);
+      position: relative;
+
+      > :nth-child(2) {
+        position: absolute;
+        top: 0;
+        right: 0.15rem;
+        font-size: 0.9rem;
+        font-weight: bold;
+        color: var(--darkest-green);
+      }
     }
   }
 
