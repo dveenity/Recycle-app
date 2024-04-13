@@ -2,44 +2,19 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { FaTimes } from "react-icons/fa";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { useQuery } from "react-query";
-import { fetchNotifications, fetchUser } from "../../Hooks/useFetch";
-import PageLoader from "../../Animations/PageLoader";
 
 const Nav = ({ toggleRoute }) => {
-  // Destructure the array elements
+  // Destructure the array elements from props
   const { routeLink } = toggleRoute[0][0];
   const { routeName } = toggleRoute[0][1];
   const toggleNav = toggleRoute[1];
+  const adminCount = toggleRoute[2][0];
+  const userCount = toggleRoute[2][1];
+  const role = toggleRoute[3];
 
-  const { data, isLoading, isError } = useQuery("user", fetchUser);
-
-  const {
-    data: notificationData,
-    isLoading: notificationLoading,
-    isError: notificationError,
-  } = useQuery("notifications", fetchNotifications);
-
-  if (isLoading || notificationLoading) return <PageLoader />;
-
-  if (isError || notificationError) {
-    // logout if error
-    return <div>Error fetching data</div>;
-  }
-
-  const { role } = data;
-
-  // filter unread messages and get length for admin
-  const unreadAdminNotifications = notificationData.filter(
-    (notification) => notification.adminMessage.status === "unread"
-  );
-  const unreadAdminCount = unreadAdminNotifications.length;
-
-  // filter unread messages and get length for general public
-  const unreadGeneralPublicNotifications = notificationData.filter(
-    (notification) => notification.userMessage?.status === "unread"
-  );
-  const unreadUserCount = unreadGeneralPublicNotifications.length;
+  // destructure obj from counts
+  const { unreadAdminCount } = adminCount;
+  const { unreadUserCount } = userCount;
 
   return (
     <div className="nav-bar">

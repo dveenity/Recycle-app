@@ -1,26 +1,26 @@
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import { fetchPDF, fetchUser } from "../../Hooks/useFetch";
+import { fetchPDF } from "../../Hooks/useFetch";
 import PageLoader from "../../Animations/PageLoader";
 import { FaCloudUploadAlt, FaDatabase } from "react-icons/fa";
 import { FcCollaboration } from "react-icons/fc";
+import PropTypes from "prop-types";
 
-const ResearcherHome = () => {
-  const { data, isLoading, isError } = useQuery("user", fetchUser);
+const ResearcherHome = ({ userItems }) => {
+  const name = userItems;
+
   const {
     data: research,
     isLoading: researchLoading,
     isError: researchError,
   } = useQuery("PDF", fetchPDF);
 
-  if (isLoading || researchLoading) return <PageLoader />;
+  if (researchLoading) return <PageLoader />;
 
-  if (isError || researchError) {
+  if (researchError) {
     // logout if error
     return <div>Error fetching data</div>;
   }
-
-  const { name } = data;
 
   // calculate total research posted
   const researches = research.length;
@@ -66,6 +66,10 @@ const ResearcherHome = () => {
       </div>
     </div>
   );
+};
+
+ResearcherHome.propTypes = {
+  userItems: PropTypes.array.isRequired,
 };
 
 export default ResearcherHome;

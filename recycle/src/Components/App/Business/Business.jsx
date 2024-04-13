@@ -1,20 +1,9 @@
 import { Link } from "react-router-dom";
-import { fetchUser } from "../../Hooks/useFetch";
-import { useQuery } from "react-query";
-import PageLoader from "../../Animations/PageLoader";
 import { FcCollaboration } from "react-icons/fc";
+import PropTypes from "prop-types";
 
-const Business = () => {
-  const { data, isLoading, isError } = useQuery("user", fetchUser);
-
-  if (isLoading) return <PageLoader />;
-
-  if (isError) {
-    // logout if error
-    return <div>Error fetching data</div>;
-  }
-
-  const { name } = data;
+const Business = ({ userItems }) => {
+  const name = userItems;
 
   return (
     <div className="user-route">
@@ -37,6 +26,10 @@ const Business = () => {
       </div>
     </div>
   );
+};
+
+Business.propTypes = {
+  userItems: PropTypes.array.isRequired,
 };
 
 export default Business;

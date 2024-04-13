@@ -190,7 +190,6 @@ app.put("/updateRole/:userId", async (req, res) => {
     res.status(200).send(updatedUser);
   } catch (error) {
     res.status(500).send("Internal server error.");
-    console.log(error);
   }
 });
 
@@ -287,7 +286,6 @@ app.post("/upload-files", upload.single("file"), async (req, res) => {
     res.status(200).send("success");
   } catch (error) {
     res.status(500).send("Internal server error.");
-    console.log(error);
   }
 });
 
@@ -332,7 +330,6 @@ app.delete(`/deleteResearch/:researchId`, async (req, res) => {
       .status(200)
       .send("Research and associated PDF file deleted successfully.");
   } catch (error) {
-    console.error(error);
     res.status(500).send("Internal server error.");
   }
 });
@@ -379,7 +376,6 @@ app.post("/deploy-policy", async (req, res) => {
       .send({ message: "Policy deployed successfully", policy: newPolicy });
   } catch (error) {
     // Return an error response if something goes wrong
-    console.error("Error deploying policy:", error);
     res.status(500).send({ error: "Internal server error" });
   }
 });
@@ -505,11 +501,12 @@ app.post("/newRecycleItem", async (req, res) => {
           { timeMessage: "You can recycle again now" }
         );
       } catch (error) {
-        console.error("Error updating notification message:", error);
+        res
+          .status(500)
+          .json({ message: "Error updating notification message:" });
       }
     }, 5 * 60 * 1000);
   } catch (error) {
-    console.error("Error submitting recycle item:", error);
     // Send error response
     res.status(500).json({ message: "Internal server error" });
   }
@@ -524,7 +521,6 @@ app.get("/recycledItems", async (req, res) => {
     // Send the recycled items as a JSON response
     res.status(200).json(recycledItems);
   } catch (error) {
-    console.error("Error fetching recycled items:", error);
     // Send an error response if there's an internal server error
     res.status(500).json({ message: "Internal server error" });
   }
@@ -539,7 +535,6 @@ app.get("/notifications", async (req, res) => {
     // Send the recycled items as a JSON response
     res.status(200).json(notifications);
   } catch (error) {
-    console.error("Error fetching recycled items:", error);
     // Send an error response if there's an internal server error
     res.status(500).json({ message: "Internal server error" });
   }
@@ -576,7 +571,6 @@ app.post("/submit-feedback", requireAuth, async (req, res) => {
     // Send success response
     res.status(201).send({ message: "Feedback submitted successfully" });
   } catch (error) {
-    console.error("Error submitting feedback:", error);
     // Send error response
     res.status(500).json({ message: "Internal server error" });
   }
@@ -591,7 +585,6 @@ app.get("/feedbacks", async (req, res) => {
     // Send the feedbacks as a JSON response
     res.status(200).send(feedbacks);
   } catch (error) {
-    console.error("Error fetching feedbacks:", error);
     // Send an error response if there's an internal server error
     res.status(500).send("Internal server error");
   }
@@ -621,7 +614,6 @@ app.put("/markUnread/:role", async (req, res) => {
 
     res.status(200).send("Notifications marked as read");
   } catch (error) {
-    console.error(error);
     res.status(500).send("Error marking notifications as read");
   }
 });

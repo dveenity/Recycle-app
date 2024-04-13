@@ -83,7 +83,6 @@ const Profile = () => {
       await refetch();
       closeBox();
     } catch (error) {
-      console.error(error);
       setResult(error.response.data);
     } finally {
       setTimeout(() => {

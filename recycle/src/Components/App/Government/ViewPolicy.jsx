@@ -40,11 +40,10 @@ const ViewPolicy = () => {
       const res = await axios.delete(`${serVer}/delete-policy/${policy}`);
 
       const { data } = res;
-      console.log(res);
       setResult(data);
       refetch();
     } catch (error) {
-      console.log(error);
+      setResult(error.response.data);
     } finally {
       setDeleteBtn("DeletePolicy");
 

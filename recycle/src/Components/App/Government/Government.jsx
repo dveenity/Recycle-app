@@ -1,26 +1,26 @@
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import { fetchPolicies, fetchUser } from "../../Hooks/useFetch";
+import { fetchPolicies } from "../../Hooks/useFetch";
 import PageLoader from "../../Animations/PageLoader";
 import { FcCollaboration } from "react-icons/fc";
 import { MdOutlinePolicy } from "react-icons/md";
+import PropTypes from "prop-types";
 
-const Government = () => {
-  const { data, isLoading, isError } = useQuery("user", fetchUser);
+const Government = ({ userItems }) => {
+  const name = userItems;
+
   const {
     data: policies,
     isLoading: policiesLoading,
     isError: policiesError,
   } = useQuery("policy", fetchPolicies);
 
-  if (isLoading || policiesLoading) return <PageLoader />;
+  if (policiesLoading) return <PageLoader />;
 
-  if (isError || policiesError) {
+  if (policiesError) {
     // logout if error
     return <div>Error fetching data</div>;
   }
-
-  const { name } = data;
 
   // calculate total policies posted
   const policiesLength = policies.length;
@@ -61,6 +61,10 @@ const Government = () => {
       </div>
     </div>
   );
+};
+
+Government.propTypes = {
+  userItems: PropTypes.array.isRequired,
 };
 
 export default Government;

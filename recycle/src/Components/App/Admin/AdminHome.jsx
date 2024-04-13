@@ -1,18 +1,16 @@
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import {
-  fetchRecycledItems,
-  fetchUser,
-  fetchUsers,
-} from "../../Hooks/useFetch";
+import { fetchRecycledItems, fetchUsers } from "../../Hooks/useFetch";
 import PageLoader from "../../Animations/PageLoader";
 import { FaUsers } from "react-icons/fa";
 import { GiSkills } from "react-icons/gi";
 import { VscFeedback } from "react-icons/vsc";
 import { TbDeviceAnalytics } from "react-icons/tb";
+import PropTypes from "prop-types";
 
-const AdminHome = () => {
-  const { data, isLoading, isError } = useQuery("user", fetchUser);
+const AdminHome = ({ userItems }) => {
+  const name = userItems;
+
   const {
     data: recycledItems,
     isLoading: recycledItemsLoading,
@@ -24,15 +22,12 @@ const AdminHome = () => {
     isError: usersError,
   } = useQuery("users", fetchUsers);
 
-  if (isLoading || recycledItemsLoading || usersLoading) return <PageLoader />;
+  if (recycledItemsLoading || usersLoading) return <PageLoader />;
 
-  if (isError || recycledItemsError || usersError) {
+  if (recycledItemsError || usersError) {
     // logout if error
     return <div>Error fetching data</div>;
   }
-
-  // extract name from data
-  const { name } = data;
 
   // get users && recycled items length
   const totalRecycledItems = recycledItems.length;
@@ -90,6 +85,10 @@ const AdminHome = () => {
       </div>
     </div>
   );
+};
+
+AdminHome.propTypes = {
+  userItems: PropTypes.array.isRequired,
 };
 
 export default AdminHome;

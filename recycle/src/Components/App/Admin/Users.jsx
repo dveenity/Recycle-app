@@ -44,7 +44,7 @@ const Users = () => {
       // reload page
       refetch();
     } catch (error) {
-      console.error(error);
+      setResult(error.response.data);
     } finally {
       setTimeout(() => {
         setResult("");

@@ -1,27 +1,27 @@
 import { Link } from "react-router-dom";
-import { fetchRecycledItems, fetchUser } from "../../Hooks/useFetch";
+import { fetchRecycledItems } from "../../Hooks/useFetch";
 import { useQuery } from "react-query";
 import PageLoader from "../../Animations/PageLoader";
 import { FaRecycle } from "react-icons/fa";
 import { SiBaremetrics } from "react-icons/si";
 import { VscFeedback } from "react-icons/vsc";
+import PropTypes from "prop-types";
 
-const User = () => {
-  const { data, isLoading, isError } = useQuery("user", fetchUser);
+const User = ({ userItems }) => {
+  const name = userItems;
+
   const {
     data: recycledItems,
     isLoading: recycledItemsLoading,
     isError: recycledItemsError,
   } = useQuery("recycledItems", fetchRecycledItems);
 
-  if (isLoading || recycledItemsLoading) return <PageLoader />;
+  if (recycledItemsLoading) return <PageLoader />;
 
-  if (isError || recycledItemsError) {
+  if (recycledItemsError) {
     // logout if error
     return <div>Error fetching data</div>;
   }
-
-  const { name } = data;
 
   // Filter recycled items by the user's name
   const userRecycledItems = recycledItems.filter(
@@ -72,6 +72,10 @@ const User = () => {
       </div>
     </div>
   );
+};
+
+User.propTypes = {
+  userItems: PropTypes.array.isRequired,
 };
 
 export default User;

@@ -1,6 +1,6 @@
 import Logout from "../Custom/Logout";
 import PageLoader from "../Animations/PageLoader";
-import { fetchUser } from "../Hooks/useFetch";
+import { fetchNotifications, fetchUser } from "../Hooks/useFetch";
 import { useQuery } from "react-query";
 import Role from "../Authentication/Role";
 import AdminHome from "./Admin/AdminHome";
@@ -21,8 +21,13 @@ const Home = () => {
   const [navBar, setNavBar] = useState(false);
 
   const { data, isLoading, isError, refetch } = useQuery("user", fetchUser);
+  const {
+    data: notificationData,
+    isLoading: notificationLoading,
+    isError: notificationError,
+  } = useQuery("notifications", fetchNotifications);
 
-  if (isError) {
+  if (isError || notificationError) {
     // logout if error
     return (
       <div className="errorFetch">
@@ -31,11 +36,26 @@ const Home = () => {
     );
   }
 
-  if (isLoading) {
+  if (isLoading || notificationLoading) {
     return <PageLoader />;
   }
 
-  const { role, _id } = data;
+  const { role, _id, name } = data;
+
+  // filter unread messages and get length for admin
+  const unreadAdminNotifications = notificationData.filter(
+    (notification) => notification.adminMessage.status === "unread"
+  );
+  const unreadAdminCount = unreadAdminNotifications.length;
+
+  // filter unread messages and get length for general public
+  const unreadGeneralPublicNotifications = notificationData.filter(
+    (notification) => notification.userMessage?.status === "unread"
+  );
+  const unreadUserCount = unreadGeneralPublicNotifications.length;
+
+  // send unread notifications counts as props to nav component
+  const unreadCounts = [{ unreadAdminCount }, { unreadUserCount }];
 
   // toggle NavBar
   const toggleNav = () => {
@@ -66,12 +86,14 @@ const Home = () => {
         )}
 
         {role === "choose" && <Role userId={[_id, refetch]} />}
-        {navBar && <Nav toggleRoute={[toggleRoute, toggleNav]} />}
-        {role === "admin" && <AdminHome />}
-        {role === "general-public" && <User />}
-        {role === "researcher" && <ResearcherHome />}
-        {role === "business" && <Business />}
-        {role === "policy-maker" && <Government />}
+        {navBar && (
+          <Nav toggleRoute={[toggleRoute, toggleNav, unreadCounts, role]} />
+        )}
+        {role === "admin" && <AdminHome userItems={[name]} />}
+        {role === "general-public" && <User userItems={[name]} />}
+        {role === "researcher" && <ResearcherHome userItems={[name]} />}
+        {role === "business" && <Business userItems={[name]} />}
+        {role === "policy-maker" && <Government userItems={[name]} />}
       </div>
       <div className="page-end">
         <Link to="/viewPolicy">
