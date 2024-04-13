@@ -597,6 +597,35 @@ app.get("/feedbacks", async (req, res) => {
   }
 });
 
+// Backend Endpoint to mark notifications as read
+app.put("/markUnread/:role", async (req, res) => {
+  const { role } = req.params;
+
+  try {
+    if (role === "admin") {
+      // Mark all admin messages as read
+      await Notifications.updateMany(
+        { "adminMessage.status": "unread" },
+        { $set: { "adminMessage.status": "read" } }
+      );
+    } else if (role === "general-public") {
+      // Mark all user messages as read
+      await Notifications.updateMany(
+        { "userMessage.status": "unread" },
+        { $set: { "userMessage.status": "read" } }
+      );
+    } else {
+      // Invalid role
+      return res.status(400).send("Invalid role");
+    }
+
+    res.status(200).send("Notifications marked as read");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error marking notifications as read");
+  }
+});
+
 app.listen(port, () => {
   console.log(`server is running on port ${port}`);
 });

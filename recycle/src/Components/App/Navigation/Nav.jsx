@@ -29,8 +29,17 @@ const Nav = ({ toggleRoute }) => {
 
   const { role } = data;
 
-  // get notification length
-  const notificationCounter = notificationData.length;
+  // filter unread messages and get length for admin
+  const unreadAdminNotifications = notificationData.filter(
+    (notification) => notification.adminMessage.status === "unread"
+  );
+  const unreadAdminCount = unreadAdminNotifications.length;
+
+  // filter unread messages and get length for general public
+  const unreadGeneralPublicNotifications = notificationData.filter(
+    (notification) => notification.userMessage?.status === "unread"
+  );
+  const unreadUserCount = unreadGeneralPublicNotifications.length;
 
   return (
     <div className="nav-bar">
@@ -38,12 +47,19 @@ const Nav = ({ toggleRoute }) => {
         <button onClick={toggleNav}>
           <FaTimes />
         </button>
-        {(role === "general-public" || role === "admin") && (
-          <Link to="/notifications">
-            <IoMdNotificationsOutline />
-            <div>{notificationCounter}</div>
-          </Link>
-        )}
+        {/* CONDITIONALLY RENDER NOTIFICATION ICON FOR ONLY ADMIN AND GENERAL PUBLIC */}
+        {(role === "general-public" || role === "admin") &&
+          (role === "admin" ? (
+            <Link to="/notifications">
+              <IoMdNotificationsOutline />
+              <div>{unreadAdminCount}</div>
+            </Link>
+          ) : (
+            <Link to="/notifications">
+              <IoMdNotificationsOutline />
+              <div>{unreadUserCount}</div>
+            </Link>
+          ))}
       </div>
 
       <ul>

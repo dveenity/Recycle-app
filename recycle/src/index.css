@@ -181,11 +181,14 @@ a {
 
       > :nth-child(2) {
         position: absolute;
-        top: 0;
-        right: 0.15rem;
+        top: -1rem;
+        right: -0.5rem;
         font-size: 0.9rem;
         font-weight: bold;
-        color: var(--darkest-green);
+        color: var(--white);
+        background-color: var(--green);
+        padding: 0.3rem;
+        border-radius: 0.5rem;
       }
     }
   }
@@ -347,15 +350,16 @@ a {
     gap: 0.5rem;
 
     select {
-      border: 1px solid var(--green);
+      border: 0.15rem solid var(--green);
       padding: 0.3rem 0.5rem;
       border-radius: 1rem;
-      font-size: clamp(1.3rem, 3vw, 1.7rem);
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
       font-weight: bold;
       outline: none;
+      width: 10rem;
 
       option {
-        font-size: clamp(1rem, 3vw, 1rem);
+        font-size: clamp(0.9rem, 3vw, 1rem);
       }
     }
 
@@ -387,7 +391,7 @@ a {
     padding: 0.5rem;
     border: 0.1rem solid var(--darkest-green);
     border-radius: 0.5rem;
-    box-shadow: 2px 3px 8px brown;
+    box-shadow: 2px 3px 8px var(--green);
     transition: 0.1s ease-in-out;
 
     &:hover {
@@ -844,9 +848,13 @@ a {
       gap: 1rem;
 
       select {
-        font-size: clamp(1.3rem, 4vw, 1.7rem);
+        font-size: clamp(1.2rem, 4vw, 1.5rem);
         font-weight: bold;
         color: var(--black);
+
+        option {
+          font-size: clamp(1rem, 4vw, 1.4rem);
+        }
       }
 
       > * {

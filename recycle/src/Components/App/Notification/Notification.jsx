@@ -2,9 +2,27 @@ import { useQuery } from "react-query";
 import HeaderGoBack from "../../Custom/HeaderGoBack";
 import { fetchNotifications, fetchUser } from "../../Hooks/useFetch";
 import PageLoader from "../../Animations/PageLoader";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import axios from "axios";
+
+const serVer = `https://recycle-app-backend.vercel.app`;
 
 const Notification = () => {
+  // function to mark all unread messages as read
+  const markNotificationsAsRead = useCallback(async () => {
+    try {
+      const res = await axios.put(`${serVer}/markUnread/${role}`);
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []); // Include role in dependency array
+
+  useEffect(() => {
+    markNotificationsAsRead();
+  }, [markNotificationsAsRead]); // Include markNotificationsAsRead in dependency array
+
+  //  fetch notifications data
   const { data, isLoading, isError } = useQuery("user", fetchUser);
   const {
     data: notificationData,
@@ -68,7 +86,7 @@ const Notification = () => {
                     <ul>
                       {userNotifications.map((notification) => (
                         <li key={notification._id}>
-                          {notification.userMessage}
+                          {notification.userMessage?.message}
                         </li>
                       ))}
                     </ul>
@@ -85,7 +103,9 @@ const Notification = () => {
           {role === "admin" ? (
             <ul>
               {adminNotifications.map((notification) => (
-                <li key={notification._id}>{notification.adminMessage}</li>
+                <li key={notification._id}>
+                  {notification.adminMessage.message}
+                </li>
               ))}
             </ul>
           ) : (
