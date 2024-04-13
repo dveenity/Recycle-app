@@ -11,8 +11,7 @@ const Notification = () => {
   // function to mark all unread messages as read
   const markNotificationsAsRead = useCallback(async () => {
     try {
-      const res = await axios.put(`${serVer}/markUnread/${role}`);
-      console.log(res);
+      await axios.put(`${serVer}/markUnread/${role}`);
     } catch (error) {
       console.error(error);
     }
