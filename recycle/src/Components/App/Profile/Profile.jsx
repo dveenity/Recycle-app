@@ -2,7 +2,7 @@ import { useState } from "react";
 import Nav from "../Navigation/Nav";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useQuery } from "react-query";
-import { fetchUser } from "../../Hooks/useFetch";
+import { fetchNotifications, fetchUser } from "../../Hooks/useFetch";
 import PageLoader from "../../Animations/PageLoader";
 import ButtonLoad from "../../Animations/ButtonLoad";
 import Logout from "../../Custom/Logout";
@@ -22,6 +22,11 @@ const Profile = () => {
 
   // fetch user details
   const { data, isLoading, isError, refetch } = useQuery("user", fetchUser);
+  const {
+    data: notificationData,
+    isLoading: notificationLoading,
+    isError: notificationError,
+  } = useQuery("notifications", fetchNotifications);
 
   // Form initialization using React Hook Form
   const {
@@ -31,14 +36,29 @@ const Profile = () => {
     formState: { errors, isSubmitting },
   } = useForm();
 
-  if (isLoading) return <PageLoader />;
+  if (isLoading || notificationLoading) return <PageLoader />;
 
-  if (isError) {
+  if (isError || notificationError) {
     // logout if error
     return <div>Error fetching data</div>;
   }
 
   const { name, role, email, _id } = data;
+
+  // filter unread messages and get length for admin
+  const unreadAdminNotifications = notificationData.filter(
+    (notification) => notification.adminMessage.status === "unread"
+  );
+  const unreadAdminCount = unreadAdminNotifications.length;
+
+  // filter unread messages and get length for general public
+  const unreadGeneralPublicNotifications = notificationData.filter(
+    (notification) => notification.userMessage?.status === "unread"
+  );
+  const unreadUserCount = unreadGeneralPublicNotifications.length;
+
+  // send unread notifications counts as props to nav component
+  const unreadCounts = [{ unreadAdminCount }, { unreadUserCount }];
 
   // toggle NavBar
   const toggleNav = () => {
@@ -109,7 +129,9 @@ const Profile = () => {
           {toggleRoute[1].routeName}
         </Link>
       </div>
-      {navBar && <Nav toggleRoute={[toggleRoute, toggleNav]} />}
+      {navBar && (
+        <Nav toggleRoute={[toggleRoute, toggleNav, unreadCounts, role]} />
+      )}
       <div className="profile-details">
         <div>
           Name: <span>{name}</span>
