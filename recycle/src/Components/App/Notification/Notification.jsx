@@ -67,7 +67,7 @@ const Notification = () => {
             {/* Render content based on toggle state */}
             {showOtherRoute ? (
               <div className="notification-display">
-                {hasNotifications && role === "user" ? (
+                {hasNotifications && role === "general-public" ? (
                   <ul>
                     {userNotifications.map((notification) => (
                       <li key={notification._id}>{notification.timeMessage}</li>
