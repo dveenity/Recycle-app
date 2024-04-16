@@ -461,7 +461,7 @@ app.post("/newRecycleItem", async (req, res) => {
     const recycleItem = new RecycleModel({
       userName: user.name,
       itemName: selectedItem,
-      weight,
+      weight: weight,
       pointsEarned,
     });
 

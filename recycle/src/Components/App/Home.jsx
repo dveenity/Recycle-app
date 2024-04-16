@@ -42,6 +42,14 @@ const Home = () => {
 
   const { role, _id, name } = data;
 
+  // fetch all notifications for admin
+  const adminNotifications = notificationData;
+
+  // Filter notifications by the user's name
+  const userNotifications = notificationData.filter(
+    (item) => item.messageOwner === name
+  );
+
   // filter unread messages and get length for admin
   const unreadAdminNotifications = notificationData.filter(
     (notification) => notification.adminMessage.status === "unread"
@@ -95,8 +103,12 @@ const Home = () => {
           <Nav toggleRoute={[toggleRoute, toggleNav, unreadCounts, role]} />
         )}
         {/* RENDER PAGES BASED ON SELECTED ROLE */}
-        {role === "admin" && <AdminHome userItems={[name]} />}
-        {role === "general-public" && <User userItems={[name]} />}
+        {role === "admin" && (
+          <AdminHome userItems={[name, adminNotifications]} />
+        )}
+        {role === "general-public" && (
+          <User userItems={[name, userNotifications]} />
+        )}
         {role === "researcher" && <ResearcherHome userItems={[name]} />}
         {role === "business" && <Business userItems={[name]} />}
         {role === "policy-maker" && <Government userItems={[name]} />}

@@ -8,7 +8,11 @@ import { VscFeedback } from "react-icons/vsc";
 import PropTypes from "prop-types";
 
 const User = ({ userItems }) => {
+  // receive user name and notifications from props
   const name = userItems[0];
+  const userNotifications = userItems[1];
+
+  const hasUserNotifications = userNotifications.length > 0;
 
   const {
     data: recycledItems,
@@ -31,20 +35,32 @@ const User = ({ userItems }) => {
   const totalRecycledItems = userRecycledItems.length;
 
   // Calculate total points earned
-  const totalRecycledPoints = userRecycledItems.reduce(
+  let totalRecycledPoints = userRecycledItems.reduce(
     (total, item) => total + item.pointsEarned,
     0
   );
+
+  let unit = null;
+  if (totalRecycledPoints > 1000) {
+    totalRecycledPoints /= 1000;
+    totalRecycledPoints = totalRecycledPoints.toFixed(2);
+    unit = "k";
+  }
 
   return (
     <div className="user-route">
       <h3>Welcome {name}</h3>
       <div>
         <div>
-          Recycled Items: <span>{totalRecycledItems}</span>
+          Recycled Items:
+          <span>{totalRecycledItems}</span>
         </div>
         <div>
-          Points Earned: <span>{totalRecycledPoints}</span>
+          Points Earned:
+          <span>
+            {totalRecycledPoints}
+            {unit}
+          </span>
         </div>
       </div>
       <div>
@@ -72,7 +88,17 @@ const User = ({ userItems }) => {
       </div>
       <div className="chain-log">
         <h3>Activity log</h3>
-        <ul></ul>
+        <ul>
+          {hasUserNotifications ? (
+            userNotifications.map((notification) => (
+              <li key={notification._id}>
+                {notification.userMessage?.message}
+              </li>
+            ))
+          ) : (
+            <li>No Activity yet</li>
+          )}
+        </ul>
       </div>
     </div>
   );
