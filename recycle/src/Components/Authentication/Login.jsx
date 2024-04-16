@@ -11,6 +11,7 @@ import axios from "axios";
 import { FaEye, FaRegEyeSlash } from "react-icons/fa";
 import ButtonLoad from "../Animations/ButtonLoad";
 import Logo from "../../assets/images/recycle.webp";
+import Sliding from "../App/Sliding";
 
 const serVer = `https://recycle-app-backend.vercel.app`;
 
@@ -145,6 +146,7 @@ const Login = () => {
           <Link to="/">Sign Up</Link>
         </div>
       </div>
+      <Sliding />
     </div>
   );
 };
