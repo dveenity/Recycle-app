@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 
 //axios to post form data
 import axios from "axios";
+import Logo from "../../assets/images/recycle.webp";
 
 import { FaEye, FaRegEyeSlash } from "react-icons/fa";
 
@@ -83,6 +84,10 @@ const SignUp = () => {
 
   return (
     <div className="authentication">
+      <div className="auth-text">
+        <img src={Logo} />
+        <h1>Welcome to Recycliv</h1>
+      </div>
       <div className="authentication-container">
         <h2>Sign Up</h2>
         <form onSubmit={handleSubmit(onSubmit, onError)} noValidate>

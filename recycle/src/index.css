@@ -231,6 +231,37 @@ a {
   background-repeat: no-repeat;
   background-size: 130%;
 
+  .auth-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    position: fixed;
+    top: 0.5rem;
+    left: 0;
+    right: 0;
+    transition: 0.1s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    img {
+      height: 3rem;
+      mix-blend-mode: multiply;
+      display: flex;
+      border-radius: 50%;
+    }
+
+    h1 {
+      font-size: clamp(1.5rem, 3vw, 1.7rem);
+      background: linear-gradient(to right, white, green);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  }
+
   .authentication-container {
     background-color: var(--white);
     box-shadow: 1px 3px 5px var(--green);
@@ -956,6 +987,8 @@ a {
 }
 @media only screen and (min-width: 600px) {
   .recycle {
+    height: 90vh;
+
     > :nth-child(2) {
       padding: 0 4rem;
 

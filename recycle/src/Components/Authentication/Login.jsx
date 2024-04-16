@@ -10,6 +10,7 @@ import axios from "axios";
 
 import { FaEye, FaRegEyeSlash } from "react-icons/fa";
 import ButtonLoad from "../Animations/ButtonLoad";
+import Logo from "../../assets/images/recycle.webp";
 
 const serVer = `https://recycle-app-backend.vercel.app`;
 
@@ -96,6 +97,10 @@ const Login = () => {
 
   return (
     <div className="authentication">
+      <div className="auth-text">
+        <img src={Logo} />
+        <h1>Welcome to Recycliv</h1>
+      </div>
       <div className="authentication-container">
         <h2>Log In</h2>
         <form onSubmit={handleSubmit(onSubmit, onError)} noValidate>
