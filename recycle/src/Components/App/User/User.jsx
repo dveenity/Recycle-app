@@ -70,6 +70,10 @@ const User = ({ userItems }) => {
           </li>
         </ul>
       </div>
+      <div className="chain-log">
+        <h3>Activity log</h3>
+        <ul></ul>
+      </div>
     </div>
   );
 };

@@ -468,9 +468,15 @@ app.post("/newRecycleItem", async (req, res) => {
     // Save the recycle item to the database
     await recycleItem.save();
 
+    let unit = "g";
+    if (weight > 1000) {
+      weight /= 1000; // Convert grams to kilograms
+      unit = "KG"; // Update the unit to KG
+    }
+
     // Generate notification messages and save to db
     const adminMessage = `${user.name} recycled a new item ${selectedItem} and earned ${pointsEarned} points`;
-    const userMessage = `You recycled a new item ${selectedItem} and earned ${pointsEarned} points`;
+    const userMessage = `You recycled ${weight}${unit} of ${selectedItem} and earned ${pointsEarned} points`;
 
     // Save notification to the database
     await Notifications.create({
