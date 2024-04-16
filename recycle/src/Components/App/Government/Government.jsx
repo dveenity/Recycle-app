@@ -7,7 +7,7 @@ import { MdOutlinePolicy } from "react-icons/md";
 import PropTypes from "prop-types";
 
 const Government = ({ userItems }) => {
-  const name = userItems;
+  const name = userItems[0];
 
   const {
     data: policies,

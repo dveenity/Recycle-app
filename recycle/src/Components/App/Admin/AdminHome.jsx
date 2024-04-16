@@ -9,7 +9,7 @@ import { TbDeviceAnalytics } from "react-icons/tb";
 import PropTypes from "prop-types";
 
 const AdminHome = ({ userItems }) => {
-  const name = userItems;
+  const name = userItems[0];
 
   const {
     data: recycledItems,

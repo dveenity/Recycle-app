@@ -8,7 +8,7 @@ import { VscFeedback } from "react-icons/vsc";
 import PropTypes from "prop-types";
 
 const User = ({ userItems }) => {
-  const name = userItems;
+  const name = userItems[0];
 
   const {
     data: recycledItems,

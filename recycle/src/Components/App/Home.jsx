@@ -70,7 +70,10 @@ const Home = () => {
       <div>
         {role !== "choose" && (
           <div className="header">
-            <img src={Logo} />
+            <div className="header-div">
+              <img src={Logo} />
+              <h1>Recycliv</h1>
+            </div>
             <button onClick={toggleNav}>
               <RxHamburgerMenu />
             </button>
@@ -85,10 +88,13 @@ const Home = () => {
           </div>
         )}
 
+        {/* DISPLAY A ROUTE TO CHOOSE ROLE YOU WANNA REGISTER */}
         {role === "choose" && <Role userId={[_id, refetch]} />}
+        {/* CONDITIONALLY RENDER NAV BAR ON CLICK */}
         {navBar && (
           <Nav toggleRoute={[toggleRoute, toggleNav, unreadCounts, role]} />
         )}
+        {/* RENDER PAGES BASED ON SELECTED ROLE */}
         {role === "admin" && <AdminHome userItems={[name]} />}
         {role === "general-public" && <User userItems={[name]} />}
         {role === "researcher" && <ResearcherHome userItems={[name]} />}
@@ -96,10 +102,12 @@ const Home = () => {
         {role === "policy-maker" && <Government userItems={[name]} />}
       </div>
       <div className="page-end">
-        <Link to="/viewPolicy">
-          Policies
-          <MdOutlinePolicy />
-        </Link>
+        {role === "policy-maker" && (
+          <Link to="/viewPolicy">
+            Policies
+            <MdOutlinePolicy />
+          </Link>
+        )}
         {role === "general-public" && (
           <Link to="/faq-and-support">
             FAQ

@@ -7,7 +7,7 @@ import { FcCollaboration } from "react-icons/fc";
 import PropTypes from "prop-types";
 
 const ResearcherHome = ({ userItems }) => {
-  const name = userItems;
+  const name = userItems[0];
 
   const {
     data: research,

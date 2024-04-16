@@ -3,7 +3,7 @@ import { FcCollaboration } from "react-icons/fc";
 import PropTypes from "prop-types";
 
 const Business = ({ userItems }) => {
-  const name = userItems;
+  const name = userItems[0];
 
   return (
     <div className="user-route">
