@@ -13,7 +13,7 @@ const User = ({ userItems }) => {
   const name = userItems[0];
   const userNotifications = userItems[1];
 
-  const hasUserNotifications = userNotifications.length > 0;
+  const hasUserNotifications = userNotifications?.length > 0;
 
   const {
     data: recycledItems,

@@ -110,23 +110,27 @@ const Home = () => {
           <User userItems={[name, userNotifications]} />
         )}
         {role === "researcher" && <ResearcherHome userItems={[name]} />}
-        {role === "business" && <Business userItems={[name]} />}
+        {role === "business" && (
+          <Business userItems={[name, userNotifications]} />
+        )}
         {role === "policy-maker" && <Government userItems={[name]} />}
       </div>
-      <div className="page-end">
-        {role === "policy-maker" && (
-          <Link to="/viewPolicy">
-            Policies
-            <MdOutlinePolicy />
-          </Link>
-        )}
-        {role === "general-public" && (
-          <Link to="/faq-and-support">
-            FAQ
-            <FaQuestion />
-          </Link>
-        )}
-      </div>
+      {(role === "policy-maker" || role === "general-public") && (
+        <div className="page-end">
+          {role === "policy-maker" && (
+            <Link to="/viewPolicy">
+              Policies
+              <MdOutlinePolicy />
+            </Link>
+          )}
+          {role === "general-public" && (
+            <Link to="/faq-and-support">
+              FAQ
+              <FaQuestion />
+            </Link>
+          )}
+        </div>
+      )}
     </div>
   );
 };

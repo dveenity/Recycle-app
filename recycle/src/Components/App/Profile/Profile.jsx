@@ -142,7 +142,7 @@ const Profile = () => {
         <div>
           Email: <span>{email}</span>
         </div>
-        {role !== "admin" && (
+        {!role && (
           <button onClick={() => toggleEditBox(_id)}>Edit Profile</button>
         )}
       </div>

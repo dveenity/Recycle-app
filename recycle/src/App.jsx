@@ -30,7 +30,6 @@ const ManageFeedbacks = lazy(() =>
   import("./Components/App/Admin/ManageFeedbacks")
 );
 const Analytics = lazy(() => import("./Components/App/Admin/Analytics"));
-const Simulation = lazy(() => import("./Components/App/Simulation"));
 
 function App() {
   const { user } = useAuthContext();
@@ -56,10 +55,6 @@ function App() {
           <Route
             path="/profile"
             element={user ? <Profile /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/simulation"
-            element={user ? <Simulation /> : <Navigate to="/login" />}
           />
           {/* ADMIN ROUTE */}
           <Route

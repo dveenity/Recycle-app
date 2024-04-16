@@ -517,7 +517,7 @@ a {
     display: flex;
     align-items: center;
     gap: 0.1rem;
-    height: 2rem;
+    height: 1.5rem;
     transition: 0.1s ease-in-out;
 
     &:hover {
@@ -832,11 +832,13 @@ a {
     display: flex;
     flex-flow: column;
     gap: 0.5rem;
+    margin-bottom: 2rem;
 
     ul {
       background-color: var(--white);
       border: 0.2rem solid var(--darkest-green);
       height: 40vw;
+      max-height: 15rem;
       overflow-y: scroll;
       padding: 0.5rem;
       border-radius: 1rem;
@@ -1334,13 +1336,17 @@ a {
 
   ul {
     display: flex;
-    flex-flow: column;
+    flex-flow: row wrap;
     align-items: center;
+    justify-content: center;
+    width: 100%;
     gap: 1rem;
     padding: 1rem 0;
 
     li {
+      background-color: var(--darkest-green);
       box-shadow: 1px 3px 5px var(--green);
+      color: var(--white);
       padding: 0.5rem;
       border-radius: 0.5rem;
       border: 1px solid var(--green);
@@ -1348,6 +1354,16 @@ a {
       flex-flow: column;
       gap: 0.2rem;
       width: 90%;
+      max-width: 20rem;
+      height: 9rem;
+
+      h2 {
+        font-size: clamp(1.2rem, 4vw, 1.5rem);
+      }
+
+      > div {
+        font-size: clamp(0.8rem, 1vw, 1.3rem);
+      }
     }
   }
 }
