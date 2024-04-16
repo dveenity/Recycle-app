@@ -6,6 +6,7 @@ import { FaRecycle } from "react-icons/fa";
 import { SiBaremetrics } from "react-icons/si";
 import { VscFeedback } from "react-icons/vsc";
 import PropTypes from "prop-types";
+import NotifAnim from "../../Animations/NotifAnim";
 
 const User = ({ userItems }) => {
   // receive user name and notifications from props
@@ -96,7 +97,10 @@ const User = ({ userItems }) => {
               </li>
             ))
           ) : (
-            <li>No Activity yet</li>
+            <div className="chain-log-none">
+              <div>No activity yet</div>
+              <NotifAnim />
+            </div>
           )}
         </ul>
       </div>
