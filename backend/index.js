@@ -574,6 +574,7 @@ app.get("/feedbacks", async (req, res) => {
 // Backend Endpoint to mark notifications as read
 app.put("/markUnread/:role", async (req, res) => {
   const { role } = req.params;
+  const { name } = req.body;
 
   try {
     if (role === "admin") {
@@ -583,9 +584,9 @@ app.put("/markUnread/:role", async (req, res) => {
         { $set: { "adminMessage.status": "read" } }
       );
     } else if (role === "general-public" || role === "business") {
-      // Mark all user messages as read
+      // Mark all user messages as read for the specified user
       await Notifications.updateMany(
-        { "userMessage.status": "unread" },
+        { messageOwner: name, "userMessage.status": "unread" },
         { $set: { "userMessage.status": "read" } }
       );
     } else {
