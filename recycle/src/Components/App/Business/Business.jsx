@@ -43,7 +43,7 @@ const Business = ({ userItems }) => {
   let unit = null;
   if (totalRecycledPoints > 1000) {
     totalRecycledPoints /= 1000;
-    totalRecycledPoints = totalRecycledPoints.toFixed(2);
+    totalRecycledPoints = totalRecycledPoints.toFixed(1);
     unit = "k";
   }
 

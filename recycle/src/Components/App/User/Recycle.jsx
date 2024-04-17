@@ -4,6 +4,9 @@ import HeaderGoBack from "../../Custom/HeaderGoBack";
 import ButtonLoad from "../../Animations/ButtonLoad";
 import { FaRecycle } from "react-icons/fa";
 import Sliding from "../Sliding";
+import { useQuery } from "react-query";
+import { fetchUser } from "../../Hooks/useFetch";
+import PageLoader from "../../Animations/PageLoader";
 
 const serVer = `https://recycle-app-backend.vercel.app`;
 
@@ -12,6 +15,18 @@ const Recycle = () => {
   const [weight, setWeight] = useState("");
   const [result, setResult] = useState("");
   const [recycleBtn, setRecycleBtn] = useState(<FaRecycle />);
+
+  //  fetch user data
+  const { data, isLoading, isError } = useQuery("user", fetchUser);
+
+  if (isLoading) return <PageLoader />;
+
+  if (isError) {
+    // logout if error
+    return <div>Error fetching data</div>;
+  }
+
+  const { role } = data;
 
   //get token
   const token = localStorage.getItem("recycle-users");
@@ -38,7 +53,7 @@ const Recycle = () => {
     try {
       const res = await axios.post(
         `${serVer}/newRecycleItem`,
-        { selectedItem, weight, pointsEarned: points },
+        { selectedItem, weight, pointsEarned: points, role },
         {
           headers: {
             Authorization: `Bearer ${token}`,

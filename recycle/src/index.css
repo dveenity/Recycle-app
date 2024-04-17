@@ -539,7 +539,7 @@ a {
 .page-end {
   background-color: var(--darkest-green);
   position: fixed;
-  bottom: 1rem;
+  bottom: 0.1rem;
   right: 0;
   left: 0;
   display: flex;
@@ -844,10 +844,11 @@ a {
           justify-content: center;
           gap: 0.5rem;
           padding: 0.2rem;
-          height: 6rem;
-          min-width: 6rem;
+          height: 5rem;
+          min-width: 5rem;
           font-weight: bold;
           color: var(--green);
+          font-size: 0.8rem;
 
           > :nth-child(2) {
             font-size: clamp(1.5rem, 4vw, 2rem);
@@ -877,7 +878,7 @@ a {
     ul {
       background-color: var(--white);
       border: 0.2rem solid var(--darkest-green);
-      height: 40vw;
+      height: 35vw;
       max-height: 15rem;
       overflow-y: scroll;
       padding: 0.5rem;

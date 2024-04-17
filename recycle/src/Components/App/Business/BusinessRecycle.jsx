@@ -4,6 +4,9 @@ import HeaderGoBack from "../../Custom/HeaderGoBack";
 import ButtonLoad from "../../Animations/ButtonLoad";
 import { FaRecycle } from "react-icons/fa";
 import Sliding from "../Sliding";
+import PageLoader from "../../Animations/PageLoader";
+import { useQuery } from "react-query";
+import { fetchUser } from "../../Hooks/useFetch";
 
 const serVer = `https://recycle-app-backend.vercel.app`;
 
@@ -12,6 +15,18 @@ const BusinessRecycle = () => {
   const [weight, setWeight] = useState("");
   const [result, setResult] = useState("");
   const [recycleBtn, setRecycleBtn] = useState(<FaRecycle />);
+
+  //  fetch user data
+  const { data, isLoading, isError } = useQuery("user", fetchUser);
+
+  if (isLoading) return <PageLoader />;
+
+  if (isError) {
+    // logout if error
+    return <div>Error fetching data</div>;
+  }
+
+  const { role } = data;
 
   //get token
   const token = localStorage.getItem("recycle-users");
@@ -43,38 +58,33 @@ const BusinessRecycle = () => {
         setRecycleBtn(<FaRecycle />);
       }, 2000);
     } else {
-      setResult("Under developments");
-      setTimeout(() => {
-        setResult("");
+      try {
+        const res = await axios.post(
+          `${serVer}/newRecycleItem`,
+          { selectedItem, weight, pointsEarned: points, role },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const { data } = res;
+
+        setResult(data.message);
+
+        // reset input
+        setWeight("");
+        setSelectedItem("");
+      } catch (error) {
+        setResult(error.response.data.message);
+      } finally {
+        setTimeout(() => {
+          setResult("");
+        }, 3000);
+
         setRecycleBtn(<FaRecycle />);
-      }, 5000);
-      // try {
-      //   const res = await axios.post(
-      //     `${serVer}/newRecycleItem`,
-      //     { selectedItem, weight, pointsEarned: points },
-      //     {
-      //       headers: {
-      //         Authorization: `Bearer ${token}`,
-      //       },
-      //     }
-      //   );
-
-      //   const { data } = res;
-
-      //   setResult(data.message);
-
-      //   // reset input
-      //   setWeight("");
-      //   setSelectedItem("");
-      // } catch (error) {
-      //   setResult(error.response.data.message);
-      // } finally {
-      //   setTimeout(() => {
-      //     setResult("");
-      //   }, 3000);
-
-      //   setRecycleBtn(<FaRecycle />);
-      // }
+      }
     }
   };
 
