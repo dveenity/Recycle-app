@@ -47,8 +47,6 @@ const Business = ({ userItems }) => {
     unit = "k";
   }
 
-  console.log(userNotifications);
-
   return (
     <div className="user-route">
       <h3>Welcome {name}</h3>
@@ -72,13 +70,13 @@ const Business = ({ userItems }) => {
         <h3>Dashboard</h3>
         <ul>
           <li>
-            <Link to="/recycle">
+            <Link to="/businessRecycle">
               <div>Recycle</div>
               <FaRecycle />
             </Link>
           </li>
           <li>
-            <Link to="/metrics">
+            <Link to="/businessMetrics">
               <div>Metrics</div>
               <SiBaremetrics />
             </Link>

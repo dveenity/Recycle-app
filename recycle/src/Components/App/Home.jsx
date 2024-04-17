@@ -115,7 +115,9 @@ const Home = () => {
         )}
         {role === "policy-maker" && <Government userItems={[name]} />}
       </div>
-      {(role === "policy-maker" || role === "general-public") && (
+      {(role === "policy-maker" ||
+        role === "general-public" ||
+        role === "business") && (
         <div className="page-end">
           {role === "policy-maker" && (
             <Link to="/viewPolicy">
@@ -123,7 +125,7 @@ const Home = () => {
               <MdOutlinePolicy />
             </Link>
           )}
-          {role === "general-public" && (
+          {(role === "general-public" || role === "business") && (
             <Link to="/faq-and-support">
               FAQ
               <FaQuestion />

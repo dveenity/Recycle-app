@@ -17,7 +17,13 @@ const Policy = lazy(() => import("./Components/App/Government/Policy"));
 const ViewPolicy = lazy(() => import("./Components/App/Government/ViewPolicy"));
 const Faq = lazy(() => import("./Components/App/User/FAQ"));
 const Recycle = lazy(() => import("./Components/App/User/Recycle"));
+const BusinessRecycle = lazy(() =>
+  import("./Components/App/Business/BusinessRecycle")
+);
 const Metrics = lazy(() => import("./Components/App/User/Metrics"));
+const BusinessMetrics = lazy(() =>
+  import("./Components/App/Business/BusinessMetrics")
+);
 const Notification = lazy(() =>
   import("./Components/App/Notification/Notification")
 );
@@ -94,6 +100,15 @@ function App() {
           <Route
             path="/viewPolicy"
             element={user ? <ViewPolicy /> : <Navigate to="/login" />}
+          />
+          {/* BUSINESS ROUTE */}
+          <Route
+            path="/businessRecycle"
+            element={user ? <BusinessRecycle /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/businessMetrics"
+            element={user ? <BusinessMetrics /> : <Navigate to="/login" />}
           />
           {/* USER ROUTE */}
           <Route

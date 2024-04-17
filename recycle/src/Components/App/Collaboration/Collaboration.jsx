@@ -64,7 +64,7 @@ const Collaboration = () => {
     <li key={i}>
       <h2>{company.name}</h2>
       <div>
-        <strong>{company.type}</strong>
+        Industry: <strong>{company.type}</strong>
       </div>
       <div>
         Email: <strong>{company.email}</strong>
