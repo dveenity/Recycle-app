@@ -582,7 +582,7 @@ app.put("/markUnread/:role", async (req, res) => {
         { "adminMessage.status": "unread" },
         { $set: { "adminMessage.status": "read" } }
       );
-    } else if (role === "general-public") {
+    } else if (role === "general-public" || role === "business") {
       // Mark all user messages as read
       await Notifications.updateMany(
         { "userMessage.status": "unread" },

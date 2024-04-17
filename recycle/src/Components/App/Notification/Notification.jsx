@@ -57,7 +57,8 @@ const Notification = () => {
         <div>
           {/* Render content for current route */}
           <div className="notification-display">
-            {hasNotifications ? (
+            {(role === "general-public" || role === "business") &&
+            hasNotifications ? (
               <ul>
                 {userNotifications.map((notification) => (
                   <li key={notification._id}>
@@ -66,7 +67,9 @@ const Notification = () => {
                 ))}
               </ul>
             ) : (
-              role === "general-public" && <div>No Notifications yet</div>
+              (role === "general-public" || role === "business") && (
+                <div>No Notifications yet</div>
+              )
             )}
           </div>
         </div>
