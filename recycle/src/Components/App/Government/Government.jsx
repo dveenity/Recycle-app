@@ -57,6 +57,12 @@ const Government = ({ userItems }) => {
               <MdOutlinePolicy />
             </Link>
           </li>
+          <li>
+            <Link to="/viewPolicy">
+              Policies
+              <MdOutlinePolicy />
+            </Link>
+          </li>
         </ul>
       </div>
     </div>

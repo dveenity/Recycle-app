@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { FaTimes } from "react-icons/fa";
+import { FaQuestion, FaTimes } from "react-icons/fa";
 import { IoMdNotificationsOutline } from "react-icons/io";
 
 const Nav = ({ toggleRoute }) => {
@@ -42,6 +42,14 @@ const Nav = ({ toggleRoute }) => {
       <ul>
         <li>
           <Link to={routeLink}>{routeName}</Link>
+        </li>
+        <li>
+          {(role === "general-public" || role === "business") && (
+            <Link to="/faq-and-support">
+              FAQ
+              <FaQuestion />
+            </Link>
+          )}
         </li>
       </ul>
     </div>

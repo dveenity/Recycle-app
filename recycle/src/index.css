@@ -535,37 +535,6 @@ a {
   }
 }
 
-/* STYLING PAGE END */
-.page-end {
-  background-color: var(--darkest-green);
-  position: fixed;
-  bottom: 0.1rem;
-  right: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 0.5rem;
-
-  > * {
-    background-color: var(--white);
-    padding: 0 0.5rem;
-    border-radius: 0.5rem;
-    color: var(--darkest-green);
-    font-size: clamp(1.3rem, 4vw, 1.7rem);
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 0.1rem;
-    height: 1.5rem;
-    transition: 0.1s ease-in-out;
-
-    &:hover {
-      transform: scale(1.05);
-    }
-  }
-}
-
 /* STYLING FAQ SECTION */
 .faq-container {
   display: flex;
@@ -878,7 +847,7 @@ a {
     ul {
       background-color: var(--white);
       border: 0.2rem solid var(--darkest-green);
-      height: 35vw;
+      height: 40vh;
       max-height: 15rem;
       overflow-y: scroll;
       padding: 0.5rem;

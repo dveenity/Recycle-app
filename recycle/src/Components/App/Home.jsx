@@ -7,14 +7,12 @@ import AdminHome from "./Admin/AdminHome";
 import ResearcherHome from "./Researcher/ResearcherHome";
 import { useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { MdOutlinePolicy } from "react-icons/md";
 import Nav from "./Navigation/Nav";
 import Logo from "../../assets/images/recycle.webp";
 import Business from "./Business/Business";
 import Government from "./Government/Government";
 import { Link } from "react-router-dom";
 import User from "./User/User";
-import { FaQuestion } from "react-icons/fa";
 import { IoMdNotificationsOutline } from "react-icons/io";
 
 const Home = () => {
@@ -31,7 +29,7 @@ const Home = () => {
     // logout if error
     return (
       <div className="errorFetch">
-        Error fetching data <Logout /> and try again
+        Database cleared! <Logout /> and try again
       </div>
     );
   }
@@ -115,24 +113,6 @@ const Home = () => {
         )}
         {role === "policy-maker" && <Government userItems={[name]} />}
       </div>
-      {(role === "policy-maker" ||
-        role === "general-public" ||
-        role === "business") && (
-        <div className="page-end">
-          {role === "policy-maker" && (
-            <Link to="/viewPolicy">
-              Policies
-              <MdOutlinePolicy />
-            </Link>
-          )}
-          {(role === "general-public" || role === "business") && (
-            <Link to="/faq-and-support">
-              FAQ
-              <FaQuestion />
-            </Link>
-          )}
-        </div>
-      )}
     </div>
   );
 };
