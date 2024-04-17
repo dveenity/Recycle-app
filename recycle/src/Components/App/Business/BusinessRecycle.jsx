@@ -43,33 +43,38 @@ const BusinessRecycle = () => {
         setRecycleBtn(<FaRecycle />);
       }, 2000);
     } else {
-      try {
-        const res = await axios.post(
-          `${serVer}/newRecycleItem`,
-          { selectedItem, weight, pointsEarned: points },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        const { data } = res;
-
-        setResult(data.message);
-
-        // reset input
-        setWeight("");
-        setSelectedItem("");
-      } catch (error) {
-        setResult(error.response.data.message);
-      } finally {
-        setTimeout(() => {
-          setResult("");
-        }, 3000);
-
+      setResult("Under developments");
+      setTimeout(() => {
+        setResult("");
         setRecycleBtn(<FaRecycle />);
-      }
+      }, 5000);
+      // try {
+      //   const res = await axios.post(
+      //     `${serVer}/newRecycleItem`,
+      //     { selectedItem, weight, pointsEarned: points },
+      //     {
+      //       headers: {
+      //         Authorization: `Bearer ${token}`,
+      //       },
+      //     }
+      //   );
+
+      //   const { data } = res;
+
+      //   setResult(data.message);
+
+      //   // reset input
+      //   setWeight("");
+      //   setSelectedItem("");
+      // } catch (error) {
+      //   setResult(error.response.data.message);
+      // } finally {
+      //   setTimeout(() => {
+      //     setResult("");
+      //   }, 3000);
+
+      //   setRecycleBtn(<FaRecycle />);
+      // }
     }
   };
 
