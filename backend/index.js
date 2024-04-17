@@ -422,7 +422,7 @@ app.use("/newRecycleItem", requireAuth);
 
 // Route to handle new recycling item submission
 app.post("/newRecycleItem", async (req, res) => {
-  const { selectedItem, weight, pointsEarned } = req.body;
+  const { selectedItem, weight, pointsEarned, role } = req.body;
   const userId = req.userId;
 
   try {
@@ -457,33 +457,62 @@ app.post("/newRecycleItem", async (req, res) => {
       });
     }
 
-    // Create a new recycle item instance
-    const recycleItem = new RecycleModel({
-      userName: user.name,
-      itemName: selectedItem,
-      weight,
-      pointsEarned,
-    });
+    let recycleItem;
+    if (role === "general-public" || role === "business") {
+      // Create a new recycle item instance
+      recycleItem = new RecycleModel({
+        userName: user.name,
+        itemName: selectedItem,
+        weight,
+        pointsEarned,
+      });
 
-    // Save the recycle item to the database
-    await recycleItem.save();
+      // Save the recycle item to the database
+      await recycleItem.save();
+    }
 
-    // Generate notification messages and save to db
-    const adminMessage = `${user.name} recycled a new item ${selectedItem} and earned ${pointsEarned} points`;
-    const userMessage = `You recycled ${weight}g of ${selectedItem} and earned ${pointsEarned} points`;
+    if (role === "general-public") {
+      // Generate notification messages and save to db
+      const adminMessage = `${user.name} recycled a new item ${selectedItem} and earned ${pointsEarned} points`;
+      const userMessage = `You recycled ${weight}g of ${selectedItem} and earned ${pointsEarned} points`;
 
-    // Save notification to the database
-    await Notifications.create({
-      messageOwner: user.name,
-      adminMessage: {
-        message: adminMessage,
-        status: "unread", // Set default status to unread
-      },
-      userMessage: {
-        message: userMessage,
-        status: "unread", // Set default status to unread
-      },
-    });
+      // Save notification to the database
+      await Notifications.create({
+        messageOwner: user.name,
+        adminMessage: {
+          message: adminMessage,
+          status: "unread", // Set default status to unread
+        },
+        userMessage: {
+          message: userMessage,
+          status: "unread", // Set default status to unread
+        },
+      });
+    } else if (role === "business") {
+      let emission = 3 * weight; // Calculate emission based on weight
+      let trees = 30 * weight; // Calculate trees based on weight
+
+      // Generate notification messages and save to db
+      const adminMessage = `${user.name} recycled a new item ${selectedItem} and earned ${pointsEarned} points`;
+      const userMessage = `You recycled ${weight}ton of ${selectedItem} and earned ${pointsEarned} points`;
+      const impact = `By recycling ${weight}ton of ${selectedItem} waste, you have avoided ${emission} tons of CO2 emissions which is equivalent to planting ${trees} trees`;
+
+      // Save notification to the database
+      await Notifications.create({
+        messageOwner: user.name,
+        adminMessage: {
+          message: adminMessage,
+          status: "unread", // Set default status to unread
+        },
+        userMessage: {
+          message: userMessage,
+          status: "unread", // Set default status to unread
+        },
+        impactMessage: {
+          message: impact,
+        },
+      });
+    }
 
     // Send success response
     res.status(201).json({ message: "Recycle item submitted successfully" });

@@ -88,7 +88,7 @@ const User = ({ userItems }) => {
         </ul>
       </div>
       <div className="chain-log">
-        <h3>Activity log</h3>
+        <h3>Environmental Impact</h3>
         <ul>
           {hasUserNotifications ? (
             userNotifications.map((notification) => (
@@ -98,7 +98,7 @@ const User = ({ userItems }) => {
             ))
           ) : (
             <div className="chain-log-none">
-              <div>No activity yet</div>
+              <div>None yet</div>
               <NotifAnim />
             </div>
           )}

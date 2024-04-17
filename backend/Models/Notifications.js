@@ -28,6 +28,11 @@ const notificationsSchema = new mongoose.Schema(
         enum: ["read", "unread"],
       },
     },
+    impactMessage: {
+      message: {
+        type: String,
+      },
+    },
   },
   { timestamps: true }
 );
