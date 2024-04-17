@@ -33,10 +33,17 @@ const AdminHome = ({ userItems }) => {
   const totalRecycledItems = recycledItems.length;
 
   // Calculate total points earned
-  const totalRecycledPoints = recycledItems.reduce(
+  let totalRecycledPoints = recycledItems.reduce(
     (total, item) => total + item.pointsEarned,
     0
   );
+
+  let unit = null;
+  if (totalRecycledPoints > 1000) {
+    totalRecycledPoints /= 1000;
+    totalRecycledPoints = totalRecycledPoints.toFixed(2);
+    unit = "k";
+  }
 
   // filter admin from users
   const filteredUsers = users.filter((item) => item.role !== "admin");
@@ -76,7 +83,11 @@ const AdminHome = ({ userItems }) => {
           Recycled Items: <span>{totalRecycledItems}</span>
         </div>
         <div>
-          Points Earned: <span>{totalRecycledPoints}</span>
+          Points Earned:{" "}
+          <span>
+            {totalRecycledPoints}
+            {unit}
+          </span>
         </div>
       </div>
       <div>
