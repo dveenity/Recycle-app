@@ -72,7 +72,7 @@ app.post("/register", async (req, res) => {
 
     // Save notification to the database
     await Notifications.create({
-      messageOwner: name,
+      messageOwner: "Admin",
       adminMessage: {
         message: adminMessage,
         status: "unread", // Set default status to unread
@@ -470,7 +470,7 @@ app.post("/newRecycleItem", async (req, res) => {
 
     // Generate notification messages and save to db
     const adminMessage = `${user.name} recycled a new item ${selectedItem} and earned ${pointsEarned} points`;
-    const userMessage = `You recycled ${weight}g ${selectedItem} and earned ${pointsEarned} points`;
+    const userMessage = `You recycled ${weight}g of ${selectedItem} and earned ${pointsEarned} points`;
 
     // Save notification to the database
     await Notifications.create({
@@ -483,29 +483,10 @@ app.post("/newRecycleItem", async (req, res) => {
         message: userMessage,
         status: "unread", // Set default status to unread
       },
-      timeMessage: `You can recycle again in 5 minute(s)`,
     });
 
     // Send success response
     res.status(201).json({ message: "Recycle item submitted successfully" });
-
-    // Clear previous timeout and define a notification to be sent after 5 minutes
-    if (user.recycleTimeout) {
-      clearTimeout(user.recycleTimeout);
-    }
-    user.recycleTimeout = setTimeout(async () => {
-      try {
-        // Update the notification message
-        await Notifications.findOneAndUpdate(
-          { messageOwner: user.name },
-          { timeMessage: "You can recycle again now" }
-        );
-      } catch (error) {
-        res
-          .status(500)
-          .json({ message: "Error updating notification message:" });
-      }
-    }, 5 * 60 * 1000);
   } catch (error) {
     // Send error response
     res.status(500).json({ message: "Internal server error" });

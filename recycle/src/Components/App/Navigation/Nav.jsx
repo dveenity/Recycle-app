@@ -23,7 +23,9 @@ const Nav = ({ toggleRoute }) => {
           <FaTimes />
         </button>
         {/* CONDITIONALLY RENDER NOTIFICATION ICON FOR ONLY ADMIN AND GENERAL PUBLIC */}
-        {(role === "general-public" || role === "admin") &&
+        {(role === "general-public" ||
+          role === "admin" ||
+          role === "business") &&
           (role === "admin" ? (
             <Link to="/notifications">
               <IoMdNotificationsOutline />

@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import HeaderGoBack from "../../Custom/HeaderGoBack";
 import { fetchNotifications, fetchUser } from "../../Hooks/useFetch";
 import PageLoader from "../../Animations/PageLoader";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import axios from "axios";
 
 const serVer = `https://recycle-app-backend.vercel.app`;
@@ -29,8 +29,6 @@ const Notification = () => {
     isError: notificationError,
   } = useQuery("notifications", fetchNotifications);
 
-  const [showOtherRoute, setShowOtherRoute] = useState(false);
-
   if (isLoading || notificationLoading) return <PageLoader />;
 
   if (isError || notificationError) {
@@ -55,62 +53,37 @@ const Notification = () => {
       <HeaderGoBack h1="Notifications" />
       <div>
         {/* USER NOTIFICATIONS */}
-        {role === "general-public" && (
-          <div className="user-notification">
-            {/* Button to toggle between routes */}
-            <button onClick={() => setShowOtherRoute(!showOtherRoute)}>
-              {showOtherRoute
-                ? "Show Notifications"
-                : "View Timer Notifications"}
-            </button>
 
-            {/* Render content based on toggle state */}
-            {showOtherRoute ? (
-              <div className="notification-display">
-                {hasNotifications && role === "general-public" ? (
-                  <ul>
-                    {userNotifications.map((notification) => (
-                      <li key={notification._id}>{notification.timeMessage}</li>
-                    ))}
-                  </ul>
-                ) : (
-                  role === "general-public" && <div>No Notifications yet</div>
-                )}
-              </div>
+        <div>
+          {/* Render content for current route */}
+          <div className="notification-display">
+            {hasNotifications ? (
+              <ul>
+                {userNotifications.map((notification) => (
+                  <li key={notification._id}>
+                    {notification.userMessage?.message}
+                  </li>
+                ))}
+              </ul>
             ) : (
-              <div>
-                {/* Render content for current route */}
-                <div className="notification-display">
-                  {hasNotifications ? (
-                    <ul>
-                      {userNotifications.map((notification) => (
-                        <li key={notification._id}>
-                          {notification.userMessage?.message}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    role === "general-public" && <div>No Notifications yet</div>
-                  )}
-                </div>
-              </div>
+              role === "general-public" && <div>No Notifications yet</div>
             )}
           </div>
-        )}
-        {/* ADMIN NOTIFICATIONS */}
-        <div className="notification-display">
-          {role === "admin" ? (
-            <ul>
-              {adminNotifications.map((notification) => (
-                <li key={notification._id}>
-                  {notification.adminMessage.message}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            role === "admin" && <div>No Notifications yet</div>
-          )}
         </div>
+      </div>
+      {/* ADMIN NOTIFICATIONS */}
+      <div className="notification-display">
+        {role === "admin" ? (
+          <ul>
+            {adminNotifications.map((notification) => (
+              <li key={notification._id}>
+                {notification.adminMessage.message}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          role === "admin" && <div>No Notifications yet</div>
+        )}
       </div>
     </div>
   );

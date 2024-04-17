@@ -4,7 +4,7 @@ const Collaboration = () => {
   const companies = [
     {
       type: "Manufacturing",
-      name: "OptiPro Manufacturing Solutions",
+      name: "OptiPro Solutions",
       email: "contact@optipromfg.com",
       contact: "+1 (824) 952- 8240",
       location: "123 Main Street, Richmond, VA 23220, United States",
@@ -62,9 +62,9 @@ const Collaboration = () => {
 
   const output = companies.map((company, i) => (
     <li key={i}>
-      <h2>{company.type}</h2>
+      <h2>{company.name}</h2>
       <div>
-        Company Name: <strong>{company.name}</strong>
+        <strong>{company.type}</strong>
       </div>
       <div>
         Email: <strong>{company.email}</strong>

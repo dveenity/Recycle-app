@@ -47,6 +47,8 @@ const Business = ({ userItems }) => {
     unit = "k";
   }
 
+  console.log(userNotifications);
+
   return (
     <div className="user-route">
       <h3>Welcome {name}</h3>
