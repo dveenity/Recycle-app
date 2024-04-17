@@ -492,6 +492,9 @@ app.post("/newRecycleItem", async (req, res) => {
       let emission = 3 * weight; // Calculate emission based on weight
       let trees = 30 * weight; // Calculate trees based on weight
 
+      // Round emission value to one decimal place
+      emission = parseFloat(emission.toFixed(1));
+
       // Generate notification messages and save to db
       const adminMessage = `${user.name} recycled a new item ${selectedItem} and earned ${pointsEarned} points`;
       const userMessage = `You recycled ${weight}ton of ${selectedItem} and earned ${pointsEarned} points`;

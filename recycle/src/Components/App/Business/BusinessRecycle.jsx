@@ -39,15 +39,15 @@ const BusinessRecycle = () => {
 
     // Calculate points based on the selected item and weight
     if (selectedItem === "paper") {
-      points = weight * 300; // Assign 300 points per gram for paper
+      points = weight * 3000; // Assign 300 points per 0.1 ton for paper
     } else if (selectedItem === "plastic") {
-      points = weight * 500; // Assign 500 points per gram for plastic
+      points = weight * 5000; // Assign 500 points per 0.1 ton for plastic
     } else if (selectedItem === "glass") {
-      points = weight * 600; // Assign 600 points per gram for glass
+      points = weight * 6000; // Assign 600 points per 0.1 ton for glass
     } else if (selectedItem === "batteries") {
-      points = weight * 800; // Assign 800 points per gram for batteries
+      points = weight * 8000; // Assign 800 points per 0.1 ton for batteries
     } else if (selectedItem === "metal") {
-      points = weight * 1000; // Assign 1000 points per gram for metal
+      points = weight * 10000; // Assign 1000 points per 0.1 ton for metal
     }
 
     if (weight < 0.1 || weight > 1) {

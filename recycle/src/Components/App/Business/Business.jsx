@@ -95,7 +95,7 @@ const Business = ({ userItems }) => {
           {hasUserNotifications ? (
             userNotifications.map((notification) => (
               <li key={notification._id}>
-                {notification.userMessage?.message}
+                {notification.impactMessage?.message}
               </li>
             ))
           ) : (
