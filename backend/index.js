@@ -492,10 +492,10 @@ app.post("/newRecycleItem", async (req, res) => {
       const userMessage = `You recycled ${weight}g of ${selectedItem} and earned ${pointsEarned} points`;
 
       let impact;
-      if (weight <= 215) {
+      if (weight < 215) {
         impact = `By recycling ${weight}g of ${selectedItem}, you are contributing towards an eco-friendly future. WELL-DONE!`;
       } else {
-        const miles = Math.ceil(weight / 215);
+        const miles = weight / 215;
         impact = `By recycling ${weight}g of ${selectedItem}, you have contributed in removing one petrol vehicle from traveling ${miles} mile(s). WELL-DONE!`;
       }
 
