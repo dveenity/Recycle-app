@@ -50,32 +50,44 @@ const Recycle = () => {
       points = weight * 10; // Assign 10 points per gram for metal
     }
 
-    try {
-      const res = await axios.post(
-        `${serVer}/newRecycleItem`,
-        { selectedItem, weight, pointsEarned: points, role },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+    if (weight < 1 || weight > 500) {
+      setResult("Sorry you can only recycle between 1 - 500g");
 
-      const { data } = res;
-
-      setResult(data.message);
-
-      // reset input
-      setWeight("");
-      setSelectedItem("");
-    } catch (error) {
-      setResult(error.response.data.message);
-    } finally {
       setTimeout(() => {
         setResult("");
       }, 3000);
 
-      setRecycleBtn(<FaRecycle />);
+      setTimeout(() => {
+        setRecycleBtn(<FaRecycle />);
+      }, 1000);
+    } else {
+      try {
+        const res = await axios.post(
+          `${serVer}/newRecycleItem`,
+          { selectedItem, weight, pointsEarned: points, role },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const { data } = res;
+
+        setResult(data.message);
+
+        // reset input
+        setWeight("");
+        setSelectedItem("");
+      } catch (error) {
+        setResult(error.response.data.message);
+      } finally {
+        setTimeout(() => {
+          setResult("");
+        }, 3000);
+
+        setRecycleBtn(<FaRecycle />);
+      }
     }
   };
 

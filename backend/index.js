@@ -142,13 +142,28 @@ app.get("/users", async (req, res) => {
 // server route to delete || disapprove user
 app.delete("/deleteUser/:deletedUserId", async (req, res) => {
   try {
-    const userId = req.params;
+    const { deletedUserId } = req.params;
 
-    // find user by id and delete user from db
-    await User.findByIdAndDelete(userId.deletedUserId);
+    // Find and delete user
+    const user = await User.findByIdAndDelete(deletedUserId);
+
+    // Check if user exists
+    if (!user) {
+      return res.status(404).send("User not found.");
+    }
+
+    //  get user name
+    const name = user.name;
+
+    // Delete user's transactions
+    await ResearchModel.deleteMany({ authorName: name });
+    await RecycleModel.deleteMany({ userName: name });
+    await PolicyModel.deleteMany({ authorName: name });
+    await Notifications.deleteMany({ messageOwner: name });
+    await Feedback.deleteMany({ feedbackBy: name });
 
     // Generate notification messages and save to db
-    const adminMessage = `You deleted a user`;
+    const adminMessage = `You deleted the user ${name}`;
 
     // Save notification to the database
     await Notifications.create({
