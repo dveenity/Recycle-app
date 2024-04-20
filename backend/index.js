@@ -476,6 +476,14 @@ app.post("/newRecycleItem", async (req, res) => {
       const adminMessage = `${user.name} recycled a new item ${selectedItem} and earned ${pointsEarned} points`;
       const userMessage = `You recycled ${weight}g of ${selectedItem} and earned ${pointsEarned} points`;
 
+      let impact;
+      if (weight <= 215) {
+        impact = `By recycling ${weight}g of ${selectedItem}, you are contributing towards an eco-friendly future. WELL-DONE!`;
+      } else {
+        const miles = Math.ceil(weight / 215);
+        impact = `By recycling ${weight}g of ${selectedItem}, you have contributed in removing one petrol vehicle from traveling ${miles} mile(s). WELL-DONE!`;
+      }
+
       // Save notification to the database
       await Notifications.create({
         messageOwner: user.name,
@@ -486,6 +494,9 @@ app.post("/newRecycleItem", async (req, res) => {
         userMessage: {
           message: userMessage,
           status: "unread", // Set default status to unread
+        },
+        impactMessage: {
+          message: impact,
         },
       });
     } else if (role === "business") {
