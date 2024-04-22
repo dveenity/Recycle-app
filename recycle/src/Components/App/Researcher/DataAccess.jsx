@@ -21,7 +21,7 @@ const DataAccess = () => {
   const [pdfFile, setPdfFile] = useState(null);
   const [selectedFileId, setSelectedFileId] = useState(null);
   const [result, setResult] = useState("");
-  const [deleteBtn, setDeleteBtn] = useState("Delete Research");
+  const [deleteBtnId, setDeleteBtnId] = useState(null); // Track the ID of the item whose delete button is clicked
 
   const { data, isLoading, isError } = useQuery("user", fetchUser);
   const {
@@ -56,7 +56,8 @@ const DataAccess = () => {
 
   // delete PDF
   const deleteFile = async (researchId) => {
-    setDeleteBtn(<ButtonLoad />);
+    setDeleteBtnId(researchId); // Set the ID of the item whose delete button is clicked
+
     try {
       const res = await axios.delete(`${serVer}/deleteResearch/${researchId}`);
 
@@ -70,11 +71,8 @@ const DataAccess = () => {
       setTimeout(() => {
         setResult("");
       }, 3000);
-
-      setDeleteBtn("Delete Research");
     }
   };
-
   return (
     <div className="admin-users">
       <HeaderGoBack h1="View Research" />
@@ -85,10 +83,14 @@ const DataAccess = () => {
               <h2>{file.authorName}</h2>
               <p>{file.description}</p>
               <button onClick={() => showFile(file)}>Show PDF</button>
-              {/* Render delete button only if the current file's ID matches the selected file's ID */}
-              {selectedFileId === file._id && name === file.authorName && (
+              {name === file.authorName && (
                 <button onClick={() => deleteFile(file._id)}>
-                  {deleteBtn}
+                  {/* Render "Delete Research" or ButtonLoad based on whether the delete button is clicked for this item */}
+                  {deleteBtnId === file._id ? (
+                    <ButtonLoad />
+                  ) : (
+                    "Delete Research"
+                  )}
                 </button>
               )}
             </li>
@@ -99,9 +101,8 @@ const DataAccess = () => {
       </ul>
       <p className="error-p">{result}</p>
       {selectedFileId && pdfFile && (
-        <div>
-          <Viewer fileUrl={pdfFile} />
-          {/* <iframe src={pdfFile} width="100%" height="500px" /> */}
+        <div className="pdf-view">
+          <Viewer fileUrl={pdfFile} className="pdf-main" />
           <button onClick={() => setSelectedFileId(null)}>Close</button>
         </div>
       )}
