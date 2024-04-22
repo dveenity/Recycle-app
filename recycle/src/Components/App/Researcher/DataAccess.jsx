@@ -85,7 +85,8 @@ const DataAccess = () => {
               <h2>{file.authorName}</h2>
               <p>{file.description}</p>
               <button onClick={() => showFile(file)}>Show PDF</button>
-              {name === file.authorName && (
+              {/* Render delete button only if the current file's ID matches the selected file's ID */}
+              {selectedFileId === file._id && name === file.authorName && (
                 <button onClick={() => deleteFile(file._id)}>
                   {deleteBtn}
                 </button>

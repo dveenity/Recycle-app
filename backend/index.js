@@ -351,7 +351,9 @@ app.get("/viewResearch", async (req, res) => {
 
     const authorName = user.name;
 
-    const research = await ResearchModel.find({ authorName });
+    const research = await ResearchModel.find({ authorName }).sort({
+      createdAt: -1,
+    });
 
     res.status(200).send(research);
   } catch (error) {
@@ -368,10 +370,6 @@ app.delete(`/deleteResearch/:researchId`, async (req, res) => {
     if (!research) {
       return res.status(404).send("Research not found.");
     }
-
-    // Delete the PDF file from the backend folder
-    const filePath = path.join(__dirname, "files", research.filename);
-    fs.unlinkSync(filePath);
 
     // Delete the research document from the database
     await ResearchModel.findByIdAndDelete(researchId);
