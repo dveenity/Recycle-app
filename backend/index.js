@@ -6,7 +6,6 @@ require("dotenv").config();
 
 const path = require("path");
 const os = require("os");
-const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
 const multer = require("multer");
 // Require the Cloudinary library

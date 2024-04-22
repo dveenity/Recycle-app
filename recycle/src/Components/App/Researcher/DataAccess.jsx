@@ -46,7 +46,7 @@ const DataAccess = () => {
   const showFile = async (file) => {
     try {
       const { filename, _id } = file;
-      const pdfUrl = `${serVer}/files/${filename}`;
+      const pdfUrl = filename;
       setPdfFile(pdfUrl);
       setSelectedFileId(_id);
     } catch (error) {
@@ -100,6 +100,7 @@ const DataAccess = () => {
       {selectedFileId && pdfFile && (
         <div>
           <Viewer fileUrl={pdfFile} />
+          {/* <iframe src={pdfFile} width="100%" height="500px" /> */}
           <button onClick={() => setSelectedFileId(null)}>Close</button>
         </div>
       )}
