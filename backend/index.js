@@ -3,20 +3,25 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+
 const path = require("path");
+const os = require("os");
+const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
 const multer = require("multer");
-// disc storage
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./files");
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now();
-    cb(null, uniqueSuffix + file.originalname);
-  },
+// Require the Cloudinary library
+const cloudinary = require("cloudinary").v2;
+
+// cloudinary configurations
+const cloud_name = process.env.cloudinaryName;
+const api_key = process.env.cloudinaryApiKey;
+const api_secret = process.env.cloudinaryApiSecret;
+
+cloudinary.config({
+  cloud_name,
+  api_key,
+  api_secret,
 });
-const upload = multer({ storage: storage });
 
 const app = express();
 app.use(express.json());
@@ -260,6 +265,22 @@ app.put("/update-profile/:userId", async (req, res) => {
   }
 });
 
+// Initialize multer upload with PDF file filter and memory storage
+const upload = multer({
+  storage: multer.memoryStorage(),
+  fileFilter: function (req, file, cb) {
+    const filetypes = /pdf/;
+    const mimetype = filetypes.test(file.mimetype);
+    const extname = filetypes.test(
+      path.extname(file.originalname).toLowerCase()
+    );
+    if (mimetype && extname) {
+      return cb(null, true);
+    }
+    cb("Error: Only PDF files are allowed!");
+  },
+});
+
 // apply middleware to protect main app routes
 app.use("/upload-files", requireAuth);
 
@@ -276,14 +297,28 @@ app.post("/upload-files", upload.single("file"), async (req, res) => {
     // find user
     const user = await User.findById(userId);
 
-    // Read the PDF file content
-    const filename = req.file.filename;
+    // Create a temporary file path
+    const tempFilePath = path.join(os.tmpdir(), req.file.originalname);
+
+    // Write the file buffer to the temporary file
+    fs.writeFileSync(tempFilePath, req.file.buffer);
+
+    // Upload file from temporary file to Cloudinary
+    const result = await cloudinary.uploader.upload(tempFilePath, {
+      resource_type: "raw", // Specify resource type as raw for binary files like PDF
+      use_filename: true, // Use original filename
+      unique_filename: false, // Don't generate a unique filename
+      folder: "research_pdfs", // Optional: specify a folder in your Cloudinary account
+    });
+
+    // Remove the temporary file
+    fs.unlinkSync(tempFilePath);
 
     await ResearchModel.create({
       authorName: user.name,
       researchName,
       description,
-      filename,
+      filename: result.secure_url,
     });
 
     // Generate notification messages and save to db
@@ -300,6 +335,7 @@ app.post("/upload-files", upload.single("file"), async (req, res) => {
 
     res.status(200).send("success");
   } catch (error) {
+    console.log(error);
     res.status(500).send("Internal server error.");
   }
 });

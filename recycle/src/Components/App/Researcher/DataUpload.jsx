@@ -5,6 +5,7 @@ import { FaCamera } from "react-icons/fa";
 import ButtonLoad from "../../Animations/ButtonLoad";
 
 const serVer = `https://recycle-app-backend.vercel.app`;
+// const serVer = `http://localhost:2244`;
 
 const token = localStorage.getItem("recycle-users");
 
@@ -70,7 +71,7 @@ const DataUpload = () => {
       setImageFile("");
       setResearchName("");
       setDescription("");
-      setFileName(""); // Clear file name after successful upload
+      setFileName(<FaCamera />); // Clear file name after successful upload
     } catch (error) {
       console.error(error);
       setResultMessage("Failed to upload file. Please try again.");
