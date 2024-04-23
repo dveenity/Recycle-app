@@ -1284,10 +1284,26 @@ a {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 1rem;
 
     .pdf-main {
-      width: 100%;
-      height: 10rem;
+      width: fit-content;
+      height: 80vh;
+    }
+
+    button {
+      background-color: black;
+      padding: 0.5rem;
+      border-radius: 1rem;
+      color: white;
+      transition: 0.1s ease-in-out;
+
+      &:hover {
+        transform: scale(1.05);
+      }
     }
   }
 }

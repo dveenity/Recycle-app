@@ -102,7 +102,7 @@ const DataAccess = () => {
       <p className="error-p">{result}</p>
       {selectedFileId && pdfFile && (
         <div className="pdf-view">
-          <Viewer fileUrl={pdfFile} className="pdf-main" />
+          <iframe src={pdfFile} className="pdf-main" />
           <button onClick={() => setSelectedFileId(null)}>Close</button>
         </div>
       )}
