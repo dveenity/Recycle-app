@@ -5,13 +5,6 @@ import { useState } from "react";
 
 import HeaderGoBack from "../../Custom/HeaderGoBack";
 
-import { Worker } from "@react-pdf-viewer/core";
-// Import the main component
-import { Viewer } from "@react-pdf-viewer/core";
-
-// Import the styles
-import "@react-pdf-viewer/core/lib/styles/index.css";
-
 import axios from "axios";
 import ButtonLoad from "../../Animations/ButtonLoad";
 
@@ -106,7 +99,6 @@ const DataAccess = () => {
           <button onClick={() => setSelectedFileId(null)}>Close</button>
         </div>
       )}
-      <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js"></Worker>
     </div>
   );
 };
